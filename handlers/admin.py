@@ -30,11 +30,20 @@ async def choose_template(callback: CallbackQuery):
     lang = parts[1]
     geo = parts[2]
 
+    chats_exist = any(geo in chat["tags"] and lang in chat["tags"] for chat in CHATS)
+
+    if not chats_exist:
+        await callback.message.edit_text(
+            f"⚠️ **Чати не знайдені!**\n\nДля напрямку **{geo.upper()}** з мовою **{lang.upper()}** в конфігу немає жодного чату.\nПеревірте теги в `config.py`.",
+            reply_markup=get_geo_kb()
+        )
+        return
+
     await callback.message.edit_text(
         f"ГЕО: {geo.upper()} | Мова: {lang.upper()}\nЯкий шаблон відправити?",
-        reply_markup=get_template_kb(lang, geo) # Передаємо далі
+        reply_markup=get_template_kb(lang, geo)
     )
-
+    await callback.answer()
 
 
 @router.callback_query(F.data.startswith('del_'))
@@ -57,7 +66,7 @@ async def delete_specific_broadcast(callback: CallbackQuery, bot: Bot):
 @router.callback_query(F.data.startswith("tmpl_"))
 async def send_broadcast(callback: CallbackQuery, bot: Bot):
     parts = callback.data.split("_")
-    lang = parts[1]        # "ua"
+    lang = parts[1]
     geo = parts[-1]
     tmpl_type = "_".join(parts[2:-1])
 
@@ -86,13 +95,6 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
                 print(f"Помилка в {chat['name']}: {e}")
                 error_count += 1
 
-    if success_count == 0 and error_count == 0:
-        await callback.message.edit_text(
-            f"⚠️ **Чати не знайдені!**\n\nДля напрямку **{geo.upper()}** з мовою **{lang.upper()}** в конфігу немає жодного чату.\nПеревірте теги в `config.py`.",
-            reply_markup=get_geo_kb() # Повертаємо на початок
-        )
-        return # Зупиняємо функцію тут
-
     config.sent_history[broadcast_id] = temp_messages
     config.save_history(config.sent_history)
 
@@ -104,8 +106,8 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
     await callback.message.answer("Виберіть наступний напрямок:", reply_markup=get_geo_kb())
     
 @router.callback_query(F.data == "back_to_geo")
-async def back(callback: CallbackQuery):
-    await callback.message.edit_text("Виберіть напрямок:", reply_markup=get_geo_kb())
+async def back_to_geo(callback: CallbackQuery):
+    await callback.message.edit_text(f"Виберіть напрямок для інформування:", reply_markup=get_geo_kb())
 
 @router.callback_query(F.data == "delete_last")
 async def delete_broadcast(callback: CallbackQuery, bot: Bot):

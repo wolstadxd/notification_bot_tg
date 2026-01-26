@@ -44,7 +44,7 @@ CHATS = [
      "mentions": ["@test1", "@test2"]},
     {"name": "Чат Перу", 
     "id": -5229326817, 
-    "tags": ["peru", "ru", "en"],
+    "tags": ["peru", "ru"],
      "mentions": ["@test3", "@test4"]},
     {"name": "Чат Україна", 
     "id": -5093445860, 
