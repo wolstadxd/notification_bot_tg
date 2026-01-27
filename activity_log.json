@@ -1,0 +1,766 @@
+[
+    {
+        "timestamp": "2026-01-27 15:03:39",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099402345178493",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:03:54",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099402709653384",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:\nГЕО: PERU | Мова: EN",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:07:19",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099402345178493",
+            "geo": "UA",
+            "deleted_messages": 0
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:07:23",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099402709653384",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:08:13",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400695912512",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:08:19",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403080334667",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:08:21",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099400695912512",
+            "geo": "PERU",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:31:45",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1706527971439291158",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:32:17",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1706527973637317806",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:33:24",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1706527973637317806",
+            "geo": "PERU",
+            "deleted_messages": 0
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:33:39",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1706527971439291158",
+            "geo": "UA",
+            "deleted_messages": 0
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:34:04",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1706527973435169170",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:\nFuck off",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:38:18",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400217860337",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:39:19",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400342143837",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Hello",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:39:56",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400147331762",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:Напишіть костомну розсилку для ГЕО UA | Мова UA",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:40:42",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400109949911",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:ГЕО: PERU | Мова: EN",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:41:38",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099400109949911",
+            "geo": "PERU",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:41:44",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099400147331762",
+            "geo": "UA",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:41:48",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099400342143837",
+            "geo": "PERU",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:41:54",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099402972558776",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:42:04",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099402972558776",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:42:05",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400217860337",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:42:06",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1706527973435169170",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:43:40",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400103338415",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:44:13",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400103338415",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:44:38",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403493797915",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:44:41",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099403493797915",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:46:01",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403225490285",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:46:03",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099403225490285",
+            "geo": "PERU",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:50:22",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099401450734600",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:50:34",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403590286948",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:hello",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:51:19",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099399712785564",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:51:32",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099402593681103",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Hello",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:51:43",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099402593681103",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Hello",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:54:52",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099402138563432",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:ГЕО: PERU | Мова: EN",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:55:27",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099402138563432",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:ГЕО: PERU | Мова: EN",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:57:34",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099399712785564",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:57:37",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099403590286948",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:57:40",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401450734600",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:57:53",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099400487118872",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:ГЕО: UA | Мова: UA",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:59:18",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099402374888515",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:dfsdfsf",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 15:59:39",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099401346124191",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "custom_template:ГЕО PERU | Мова RU",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:00:22",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400168499043",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:00:46",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400885677704",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:14:35",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1992442921779389794",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:15:00",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1992442918573580194",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:17:13",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1992442918264601028",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:Монобанк зараз не доступний. Всі інші напрямки працюють штатно 🎯\n\nПовідомимо Вам щодо оновлення 👻💀☠️",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:17:46",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1992442918573580194",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "fixed",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:18:34",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1992442921779389794",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "tech",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:18:43",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1992442921057636178",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:19:01",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1992442921057636178",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:19:06",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1992442918264601028",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:19:33",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1992442919470934077",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:19:36",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1992442920224594932",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:19:41",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1992442918645628278",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:19:54",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1992442918940218538",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:Custom",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:19:58",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1992442919906567536",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:20:08",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1992442919906567536",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:20:09",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1992442918940218538",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:20:10",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1992442918645628278",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:20:15",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1992442920224594932",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:20:16",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1992442919470934077",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:24:57",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099401264775230",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:25:07",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099400489766629",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Hello",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    }
+]

@@ -75,14 +75,30 @@ async def send_custom_templeate(callback: CallbackQuery, state: FSMContext, bot:
                 print(f"Помилка в {chat['name']}: {e}")
                 error_count += 1
 
-    config.sent_history[broadcast_id] = temp_messages
+    config.sent_history[broadcast_id] = {
+        "geo": geo.upper(),
+        "lang": lang.upper(),
+        "type": f"custom_template:{final_text}",
+        "messages": temp_messages
+    }
     config.save_history(config.sent_history)
+
+    config.write_event_log("SEND CUSTOM", {
+        "broadcast_id": broadcast_id,
+        "geo": geo.upper(),
+        "lang": lang.upper(),
+        "template": f"custom_template:{final_text}",
+        "results": {
+            "success": success_count,
+            "errors": error_count
+        }
+    })
 
     delete_kb = InlineKeyboardBuilder()
     delete_kb.row(InlineKeyboardButton(text='🗑 Видалити цю розсилку', callback_data=f'del_{broadcast_id}'))
 
     await callback.answer("Розсилка завершена!")
-    await callback.message.edit_text(f"✅ Розсилка {final_text} для {geo} виконана.\n\n Успішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
+    await callback.message.edit_text(f"✅ Розсилка {final_text} для {geo.upper()} виконана.\n\n Успішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
     await callback.message.answer("Виберіть наступний напрямок:", reply_markup=get_geo_kb())
     await state.clear()
 

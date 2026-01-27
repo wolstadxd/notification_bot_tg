@@ -22,8 +22,8 @@ def get_template_kb(lang, geo):
 
 def get_yes_no_custom_kb(geo_from_state, lang_from_state):
     builder = InlineKeyboardBuilder()
-    builder.add(InlineKeyboardButton(text="Yes, send please", callback_data="yes_custom"))
-    builder.add(InlineKeyboardButton(text="Cancel please", callback_data="no_custom"))
+    builder.add(InlineKeyboardButton(text="Так, відправити", callback_data="yes_custom"))
+    builder.add(InlineKeyboardButton(text="Ні, повернутись до ГЕО", callback_data="no_custom"))
     return builder.as_markup()
 
 

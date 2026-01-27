@@ -3,7 +3,7 @@ from aiogram import Router, F
 from aiogram.types import InlineKeyboardButton, Message, CallbackQuery
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters import Command
-from config import ALLOWED_USERS, TEMPLATES, CHATS, sent_history
+from config import ALLOWED_USERS, TEMPLATES, CHATS, sent_history, write_event_log
 import config
 from keyboards import get_geo_kb, get_template_kb, get_lang_kb
 
@@ -23,6 +23,7 @@ async def choose_language(callback: CallbackQuery):
         f"Вибрано ГЕО: {geo.upper()}\nВиберіть мову розсилки:", 
         reply_markup=get_lang_kb(geo)
     )
+    await callback.answer()
 
 @router.callback_query(F.data.startswith("lang_"))
 async def choose_template(callback: CallbackQuery):
@@ -45,24 +46,6 @@ async def choose_template(callback: CallbackQuery):
     )
     await callback.answer()
 
-
-@router.callback_query(F.data.startswith('del_'))
-async def delete_specific_broadcast(callback: CallbackQuery, bot: Bot):
-    broadcast_id = callback.data.split('_')[1]
-    if broadcast_id in config.sent_history:
-        messages_to_delete = config.sent_history.pop(broadcast_id)
-        config.save_history(config.sent_history)
-        for c_id, m_id in messages_to_delete:
-            try:
-                await bot.delete_message(chat_id=c_id, message_id=m_id)
-            except Exception as e:
-                print(f"Помилка видалення в чаті {c_id}: {e}")
-
-        await callback.answer("Саме цю розсилку видалено всюди!")
-        await callback.message.edit_text("🗑 Ця розсилка була повністю видалена з усіх чатів.")
-    else:
-        await callback.answer("Дані не знайдені або розсилка вже видалена.", show_alert=True)
-
 @router.callback_query(F.data.startswith("tmpl_"))
 async def send_broadcast(callback: CallbackQuery, bot: Bot):
     parts = callback.data.split("_")
@@ -78,8 +61,7 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
     except KeyError:
         await callback.answer("Помилка: Шаблон не знайдено", show_alert=True)
         return
-    
-    broadcast_id = str(callback.id)
+
     temp_messages = []
 
     for chat in CHATS:
@@ -95,8 +77,26 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
                 print(f"Помилка в {chat['name']}: {e}")
                 error_count += 1
 
-    config.sent_history[broadcast_id] = temp_messages
+    broadcast_id = str(callback.id)
+    config.sent_history[broadcast_id] = {
+        "geo": geo.upper(),
+        "lang": lang.upper(),
+        "type": tmpl_type,
+        "messages": temp_messages  # Тут наші [(chat_id, msg_id)]
+    }
     config.save_history(config.sent_history)
+
+    # 2. Пишемо у "Вічну книгу" для СТО (Пункт 1 твого плану)
+    config.write_event_log("SEND", {
+        "broadcast_id": broadcast_id,
+        "geo": geo.upper(),
+        "lang": lang.upper(),
+        "template": tmpl_type,
+        "results": {
+            "success": success_count,
+            "errors": error_count
+        }
+    })
 
     delete_cb=InlineKeyboardBuilder()
     delete_cb.row(InlineKeyboardButton(text='Видалити цю розсилку', callback_data=f'del_{broadcast_id}'))
@@ -104,10 +104,7 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
     await callback.answer("Відправлено!")
     await callback.message.edit_text(f"✅ Розсилка завершена!\nНапрямок: {geo}\nТип: {tmpl_type}\n\n Успішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_cb.as_markup())
     await callback.message.answer("Виберіть наступний напрямок:", reply_markup=get_geo_kb())
-    
-@router.callback_query(F.data == "back_to_geo")
-async def back_to_geo(callback: CallbackQuery):
-    await callback.message.edit_text(f"Виберіть напрямок для інформування:", reply_markup=get_geo_kb())
+
 
 @router.callback_query(F.data == "delete_last")
 async def delete_broadcast(callback: CallbackQuery, bot: Bot):
@@ -116,17 +113,71 @@ async def delete_broadcast(callback: CallbackQuery, bot: Bot):
         return
 
     last_id = list(config.sent_history.keys())[-1]
-    messages = config.sent_history.pop(last_id)
+    broadcast_data = config.sent_history[last_id]
 
-    for c_id, m_id in messages:
+    messages_to_delete = broadcast_data.get('messages', [])
+    geo = broadcast_data.get("geo", "Невідомо")
+    lang = broadcast_data.get("lang", "Невідомо")
+
+    deleted_count = 0
+
+    for chat_id, msg_id in messages_to_delete:
         try:
-            await bot.delete_message(chat_id=c_id, message_id=m_id)
-        except:
-            pass
+            await bot.delete_message(chat_id=chat_id, message_id=msg_id)
+            deleted_count += 1
+        except Exception as e:
+            print(f"Не вдалося видалити в {chat_id}: {e}")
 
+    config.write_event_log('DELETE_LAST', {
+        "broadcast_id": last_id,
+        "geo": geo,
+        "deleted_count": deleted_count
+    })
+
+    del config.sent_history[last_id]
     config.save_history(config.sent_history)
+    
     await callback.answer("Видалено!")
-    await callback.message.edit_text("🗑 Повідомлення видалені.")
+    await callback.message.edit_text(f"🗑 Видалено останню розсилку:\n\nПовідомлень:{deleted_count}\nГЕО: {geo}\nМова: {lang}")
     await callback.message.answer('Виберіть наступний напрямок:', reply_markup=get_geo_kb())
     
+
+@router.callback_query(F.data.startswith('del_'))
+async def delete_specific_broadcast(callback: CallbackQuery, bot: Bot):
+    broadcast_id = callback.data.split('_')[1]
+    if broadcast_id not in config.sent_history:
+        await callback.answer("Дані не знайдені або розсилка вже видалена.", show_alert=True)
+        return
+        
+    broadcast_data = config.sent_history[broadcast_id]
+    messages_to_delete = broadcast_data.get('messages', [])
+    geo = broadcast_data.get("geo", "Невідомо") 
+    lang = broadcast_data.get('lang', 'Невідомо')   
+    type = broadcast_data.get('type', 'Невідомо')   
+
+    deleted_count = 0
+    for c_id, m_id in messages_to_delete:
+        try:
+            await bot.delete_message(chat_id=c_id, message_id=m_id)
+            deleted_count += 1
+        except Exception as e:
+            print(f"Помилка видалення в чаті {c_id}: {e}")
+
+    config.write_event_log("DELETE_SPECIFIC", {
+        "broadcast_id": broadcast_id,
+        "geo": geo,
+        "lang": lang,
+        "template": type,
+        "deleted_messages": deleted_count
+    })
+
+    del config.sent_history[broadcast_id]
+    config.save_history(config.sent_history)
+
+    await callback.answer("Саме цю розсилку видалено всюди!")
+    await callback.message.edit_text("🗑 Ця розсилка була повністю видалена з усіх чатів.")
+
+@router.callback_query(F.data == "back_to_geo")
+async def back_to_geo(callback: CallbackQuery):
+    await callback.message.edit_text(f"Виберіть напрямок для інформування:", reply_markup=get_geo_kb())
     

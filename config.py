@@ -1,6 +1,7 @@
 import json
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()  # підтягуємо змінні з .env, якщо файл є
 
@@ -9,27 +10,42 @@ if not TOKEN:
     raise RuntimeError("BOT_TOKEN env var is not set")
 
 HISTORY_FILE = "sent_history.json"
+LOG_FILE = "activity_log.json"
 
-def save_history(data):
-    """Зберігає історію у файл"""
-    with open(HISTORY_FILE, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+# Функція для "Вічної книги" (Пункт 1)
+def write_event_log(event_type, details):
+    log_entry = {
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "event": event_type,
+        "details": details
+    }
+
+    logs = []
+    if os.path.exists(LOG_FILE):
+        with open(LOG_FILE, 'r', encoding='utf-8') as f:
+            try:
+                logs = json.load(f)
+            except: logs = []
+
+    logs.append(log_entry)
+
+    with open(LOG_FILE, 'w', encoding='utf-8') as f:
+        json.dump(logs, f, ensure_ascii=False, indent=4)
+
+# Функція для збереження "Стікерів" (Пункт 2)
+def save_history(history_data):
+    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(history_data, f, ensure_ascii=False, indent=4)
 
 def load_history():
-    """Завантажує історію, створюючи файл за потреби"""
-    # 1. Перевіряємо, чи існує файл
+    """Завантажує історію при старті бота"""
     if not os.path.exists(HISTORY_FILE):
-        # Якщо файлу немає — створюємо його з пустим словником всередині
         save_history({})
         return {}
-
-    # 2. Якщо файл є, читаємо його з перевіркою на порожнечу (Варіант №1)
     try:
         with open(HISTORY_FILE, 'r', encoding='utf-8') as f:
             raw = f.read().strip()
-            if not raw:
-                return {}
-            return json.loads(raw)
+            return json.loads(raw) if raw else {}
     except Exception as e:
         print(f"Помилка при читанні JSON: {e}")
         return {}
@@ -52,7 +68,7 @@ CHATS = [
      "mentions": ["@test5", "@test6"]},
 ]
 
-ALLOWED_USERS = [437279092, 6812779400]
+ALLOWED_USERS = [437279092, 6812779400, 397332006]
 
 TEMPLATES = {
     "ua": {
