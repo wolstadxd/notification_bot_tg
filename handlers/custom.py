@@ -29,6 +29,15 @@ async def listening_new_text(callback: CallbackQuery, state: FSMContext):
     await state.set_state(Custom.text)
     await callback.answer()
 
+@router.callback_query(F.data == "back_to_geo", Custom.text)
+async def back_to_geo_cancel(callback: CallbackQuery, state: FSMContext):
+    await state.clear()  # Скидаємо блокнот (стан)
+    await callback.message.edit_text(
+        "Виберіть напрямок для інформування:", 
+        reply_markup=get_geo_kb()
+    )
+    await callback.answer()
+
 @router.message(Custom.text)
 async def check_text(message: Message, state: FSMContext):
     await state.update_data(user_text = message.text)

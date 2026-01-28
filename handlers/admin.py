@@ -181,4 +181,5 @@ async def delete_specific_broadcast(callback: CallbackQuery, bot: Bot):
 @router.callback_query(F.data == "back_to_geo")
 async def back_to_geo(callback: CallbackQuery):
     await callback.message.edit_text(f"Виберіть напрямок для інформування:", reply_markup=get_geo_kb())
+    await callback.answer()
     
