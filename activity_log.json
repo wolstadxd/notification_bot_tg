@@ -762,5 +762,677 @@
                 "errors": 0
             }
         }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:15",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400489766629",
+            "geo": "PERU",
+            "deleted_count": 0
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:15",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400489766629",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:17",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401264775230",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:18",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400885677704",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:19",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400168499043",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:20",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401346124191",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:21",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099402374888515",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:38:23",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400487118872",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:41:13",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403624244616",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 16:41:31",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099402356115778",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Hello peru en",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 17:23:18",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099401399705904",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 17:23:27",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099402776859559",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:ГЕО: UA | Мова: UA",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 17:47:10",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099402323498600",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 17:47:22",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400105423917",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 17:47:32",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099403013785903",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:ГЕО: UA | Мова: UA",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-27 17:49:19",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099401209243120",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:выаыва",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 12:39:50",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403490461450",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 12:40:01",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099401148448316",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:ГЕО: PERU | Мова: EN",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 12:57:16",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099402761479777",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 12:57:55",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400765796888",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 13:52:02",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099401811332924",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 13:52:20",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099400341779992",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Це кастомна розсилка",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 13:54:31",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099400017970050",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Напишіть костомну розсилку для ГЕО PERU | Мова EN",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 13:55:28",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099401169166673",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Будь ласка, напишіть текст:",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 13:56:05",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099400430647760",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:kzkzkz",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 13:58:56",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099402030008640",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Спостерігається зниження конверсії по напрямку UA. Технічний відділ вже займається",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:00:19",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099402310223466",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:Спостерігається зниження конверсії по напрямку UA. Технічний відділ вже займається",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:01:39",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099399516298853",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:Спостерігається зниження конверсії по напрямку UA. Технічний відділ вже займається",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:02:35",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403542220222",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:06:09",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099399894399784",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:ГЕО PERU | Мова EN",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:06:21",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099401481726966",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:07:47",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400041968003",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:08:22",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099401665700144",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:09:12",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099399938354080",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:13:55",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403243712720",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:00",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099403400585152",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:04",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099401048417532",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:14",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099399616864032",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "custom_template:Розсилка завершена!\nНапрямок: PERU | Мова: RU\nТип: fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:51",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099399616864032",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:52",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401048417532",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:52",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099403400585152",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:53",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099403243712720",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:54",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099399938354080",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:14:59",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401665700144",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:00",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400041968003",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:01",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401481726966",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:02",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099399894399784",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:02",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099403542220222",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:06",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099399516298853",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:08",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099402310223466",
+            "geo": "UA",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:09",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099402030008640",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:09",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400430647760",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:10",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401169166673",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:13",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400017970050",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:14",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400341779992",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:15",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401811332924",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:16",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400765796888",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 14:15:16",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099402761479777",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
     }
 ]

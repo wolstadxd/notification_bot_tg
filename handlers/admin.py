@@ -38,6 +38,7 @@ async def choose_template(callback: CallbackQuery):
             f"⚠️ **Чати не знайдені!**\n\nДля напрямку **{geo.upper()}** з мовою **{lang.upper()}** в конфігу немає жодного чату.\nПеревірте теги в `config.py`.",
             reply_markup=get_geo_kb()
         )
+        await callback.answer()
         return
 
     await callback.message.edit_text(
@@ -102,7 +103,7 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
     delete_cb.row(InlineKeyboardButton(text='Видалити цю розсилку', callback_data=f'del_{broadcast_id}'))
 
     await callback.answer("Відправлено!")
-    await callback.message.edit_text(f"✅ Розсилка завершена!\nНапрямок: {geo}\nТип: {tmpl_type}\n\n Успішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_cb.as_markup())
+    await callback.message.edit_text(f"✅ Розсилка завершена!\nНапрямок: {geo.upper()} | Мова: {lang.upper()}\nТип: {tmpl_type}\n\n Успішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_cb.as_markup())
     await callback.message.answer("Виберіть наступний напрямок:", reply_markup=get_geo_kb())
 
 

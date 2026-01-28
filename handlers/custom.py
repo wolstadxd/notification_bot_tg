@@ -3,10 +3,10 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
-from aiogram.types import InlineKeyboardButton, Message, CallbackQuery, ReplyKeyboardRemove
+from aiogram.types import InlineKeyboardButton, Message, CallbackQuery
 from config import CHATS
 import config
-from keyboards import get_geo_kb, get_yes_no_custom_kb
+from keyboards import get_geo_kb, get_yes_no_custom_kb, back_to_geo
 
 router = Router()
 
@@ -21,9 +21,10 @@ async def listening_new_text(callback: CallbackQuery, state: FSMContext):
     lang_name = callback.data.split("_")[2]
     await state.update_data(geo=geo_name)
     await state.update_data(lang=lang_name)
-    await callback.message.answer(
+    await callback.message.edit_reply_markup(reply_markup=None)
+    await callback.message.edit_text(
         f"Напишіть костомну розсилку для ГЕО {geo_name.upper()} | Мова {lang_name.upper()}.\nБудь ласка, напишіть текст:",
-        reply_markup=ReplyKeyboardRemove(),
+        reply_markup=back_to_geo()
     )
     await state.set_state(Custom.text)
     await callback.answer()
@@ -98,7 +99,7 @@ async def send_custom_templeate(callback: CallbackQuery, state: FSMContext, bot:
     delete_kb.row(InlineKeyboardButton(text='🗑 Видалити цю розсилку', callback_data=f'del_{broadcast_id}'))
 
     await callback.answer("Розсилка завершена!")
-    await callback.message.edit_text(f"✅ Розсилка {final_text} для {geo.upper()} виконана.\n\n Успішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
+    await callback.message.edit_text(f"✅ Твоя розсилка для ГЕО {geo.upper()} | Мова {lang.upper()} виконана:\n\n\"{final_text}\"\n\nУспішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
     await callback.message.answer("Виберіть наступний напрямок:", reply_markup=get_geo_kb())
     await state.clear()
 

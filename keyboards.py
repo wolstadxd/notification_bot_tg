@@ -34,3 +34,8 @@ def get_lang_kb(geo: str):
     builder.row(InlineKeyboardButton(text="ru", callback_data=f"lang_ru_{geo}"))
     builder.row(InlineKeyboardButton(text="⬅️ Назад", callback_data=f"back_to_geo"))
     return builder.as_markup()
+
+def back_to_geo():
+    builder = InlineKeyboardBuilder()
+    builder.row(InlineKeyboardButton(text="⬅️ Назад до ГЕО", callback_data=f"back_to_geo"))
+    return builder.as_markup()
