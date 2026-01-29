@@ -1434,5 +1434,76 @@
             "geo": "PERU",
             "deleted_count": 1
         }
+    },
+    {
+        "timestamp": "2026-01-28 15:24:32",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099401800119554",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "custom_template:Напишіть костомну розсилку для ГЕО PERU | Мова RU",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 15:24:38",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099401800119554",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "custom_template:Напишіть костомну розсилку для ГЕО PERU | Мова RU",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 16:53:15",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1908609711464254316",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "custom_template:tech розсилка",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 16:53:39",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1908609709755002388",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-01-28 16:54:15",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1908609709755002388",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-01-28 16:54:25",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1908609711464254316",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
     }
 ]

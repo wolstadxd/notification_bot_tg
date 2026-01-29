@@ -68,7 +68,7 @@ CHATS = [
      "mentions": ["@test5", "@test6"]},
 ]
 
-ALLOWED_USERS = [437279092, 6812779400, 397332006]
+ALLOWED_USERS = [437279092, 6812779400]
 
 TEMPLATES = {
     "ua": {
