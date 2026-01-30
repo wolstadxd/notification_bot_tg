@@ -56,14 +56,17 @@ sent_history = load_history()
 CHATS = [
     {"name": "Чат Перу", 
      "id": -5085462955, 
+     "status": "merchant",
      "tags": ["peru", "en"], 
      "mentions": ["@test1", "@test2"]},
     {"name": "Чат Перу", 
     "id": -5229326817, 
+    "status": "merchant",
     "tags": ["peru", "ru"],
      "mentions": ["@test3", "@test4"]},
     {"name": "Чат Україна", 
     "id": -5093445860, 
+    "status": "merchant",
     "tags": ["ua", "ua"],
      "mentions": ["@test5", "@test6"]},
 ]

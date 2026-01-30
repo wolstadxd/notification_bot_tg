@@ -21,7 +21,6 @@ async def listening_new_text(callback: CallbackQuery, state: FSMContext):
     lang_name = callback.data.split("_")[2]
     await state.update_data(geo=geo_name)
     await state.update_data(lang=lang_name)
-    await callback.message.edit_reply_markup(reply_markup=None)
     await callback.message.edit_text(
         f"Напишіть костомну розсилку для ГЕО {geo_name.upper()} | Мова {lang_name.upper()}.\nБудь ласка, напишіть текст:",
         reply_markup=back_to_geo()
@@ -31,7 +30,7 @@ async def listening_new_text(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == "back_to_geo", Custom.text)
 async def back_to_geo_cancel(callback: CallbackQuery, state: FSMContext):
-    await state.clear()  # Скидаємо блокнот (стан)
+    await state.clear()
     await callback.message.edit_text(
         "Виберіть напрямок для інформування:", 
         reply_markup=get_geo_kb()
@@ -48,7 +47,7 @@ async def check_text(message: Message, state: FSMContext):
 
     await message.answer(
         f'Ось твій текст для гео {geo_from_state.upper()} та мови {lang_from_state.upper()}:\n\n{text_from_state}\n\n Надсилати?',
-        reply_markup=get_yes_no_custom_kb(geo_from_state, lang_from_state)
+        reply_markup=get_yes_no_custom_kb()
     )
 
 @router.callback_query(F.data.startswith('yes_custom'))
