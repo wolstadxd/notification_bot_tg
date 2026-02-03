@@ -10,6 +10,13 @@ def get_geo_kb():
     builder.row(InlineKeyboardButton(text="🗑 Видалити останню розсилку", callback_data="delete_last"))
     return builder.as_markup()
 
+def get_geo_kb_all():
+    builder = InlineKeyboardBuilder()
+    builder.row(InlineKeyboardButton(text="🇵🇪 Перу", callback_data="all_geo_peru"))
+    builder.row(InlineKeyboardButton(text="🇺🇦 Україна", callback_data="all_geo_ua"))
+    builder.row(InlineKeyboardButton(text="⬅️ Назад", callback_data=f"back_to_geo"))
+    return builder.as_markup()
+
 
 def get_template_kb(lang, geo):
     builder = InlineKeyboardBuilder()

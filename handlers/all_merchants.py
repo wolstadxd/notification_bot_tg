@@ -1,30 +1,35 @@
-from operator import call
-import aiogram
 from aiogram import Router, F, Bot
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, InlineKeyboardButton
+from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 import config
-from keyboards import back_to_geo, get_geo_kb, get_lang_kb_all, get_yes_no_custom_kb_all
+from keyboards import back_to_geo, get_geo_kb, get_geo_kb_all, get_lang_kb_all, get_yes_no_custom_kb_all
 
 router = Router()
 
 class CustomAll(StatesGroup):
+    geo = State()
     text = State()
     lang = State()
 
 
+@router.message(Command("all_merchants"))
+async def listening_text_all(message: Message):
+    await message.answer("Виберіть гео для розсилки:", reply_markup=get_geo_kb_all())
 
-@router.callback_query(F.data == "all_merchants")
-async def listening_text_all(callback: CallbackQuery):
+@router.callback_query(F.data.startswith("all_geo"))
+async def choose_geo_all(callback: CallbackQuery, state: FSMContext):
+    geo_all = callback.data.split('_')[2]
+    await state.update_data(geo=geo_all)
     await callback.message.edit_text(
-        f"Виберіть мову розсилки:",
+        f"Виберіть мову для розсилки:",
         reply_markup=get_lang_kb_all()
     )
     await callback.answer()
 
-@router.callback_query(F.data.startswith("all_lang"))
+@router.callback_query(F.data.startswith("all_geo"))
 async def choose_lang_all(callback: CallbackQuery, state: FSMContext):
     lang_all = callback.data.split('_')[2]
     await state.update_data(lang=lang_all)
