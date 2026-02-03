@@ -1505,5 +1505,100 @@
             "geo": "PERU",
             "deleted_count": 1
         }
+    },
+    {
+        "timestamp": "2026-02-03 10:35:54",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099402898750562",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-03 10:36:32",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099402898750562",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "deleted_messages": 1
+        }
+    },
+    {
+        "timestamp": "2026-02-03 10:37:26",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400087568987",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "tech",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-03 11:11:59",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400034148201",
+            "geo": "PERU",
+            "lang": "RU",
+            "template": "fixed",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-03 11:19:40",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099401425756094",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:Це моя кастомна розсилка, для гео Україна на мові українській",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-03 11:21:54",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099399735192397",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:sdfsfsdf",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-03 11:22:24",
+        "event": "SEND CUSTOM",
+        "details": {
+            "broadcast_id": "1878099403259242923",
+            "geo": "UA",
+            "lang": "UA",
+            "template": "custom_template:ываыа",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
     }
 ]

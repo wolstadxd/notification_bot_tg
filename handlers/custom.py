@@ -23,7 +23,7 @@ async def listening_new_text(callback: CallbackQuery, state: FSMContext):
     await state.update_data(lang=lang_name)
     await callback.message.edit_reply_markup(reply_markup=None)
     await callback.message.edit_text(
-        f"Напишіть костомну розсилку для ГЕО {geo_name.upper()} | Мова {lang_name.upper()}.\nБудь ласка, напишіть текст:",
+        f"Напишіть костомну розсилку:\nГЕО: {geo_name.upper()} | Мова: {lang_name.upper()}",
         reply_markup=back_to_geo()
     )
     await state.set_state(Custom.text)
@@ -31,7 +31,7 @@ async def listening_new_text(callback: CallbackQuery, state: FSMContext):
 
 @router.callback_query(F.data == "back_to_geo", Custom.text)
 async def back_to_geo_cancel(callback: CallbackQuery, state: FSMContext):
-    await state.clear()  # Скидаємо блокнот (стан)
+    await state.clear()
     await callback.message.edit_text(
         "Виберіть напрямок для інформування:", 
         reply_markup=get_geo_kb()
@@ -47,7 +47,7 @@ async def check_text(message: Message, state: FSMContext):
     lang_from_state = data.get('lang')
 
     await message.answer(
-        f'Ось твій текст для гео {geo_from_state.upper()} та мови {lang_from_state.upper()}:\n\n{text_from_state}\n\n Надсилати?',
+        f'Ось твій текст для гео {geo_from_state.upper()} та мови {lang_from_state.upper()}:\n\"{text_from_state}\"\n\nНадсилати?',
         reply_markup=get_yes_no_custom_kb(geo_from_state, lang_from_state)
     )
 
@@ -108,7 +108,7 @@ async def send_custom_templeate(callback: CallbackQuery, state: FSMContext, bot:
     delete_kb.row(InlineKeyboardButton(text='🗑 Видалити цю розсилку', callback_data=f'del_{broadcast_id}'))
 
     await callback.answer("Розсилка завершена!")
-    await callback.message.edit_text(f"✅ Твоя розсилка для ГЕО {geo.upper()} | Мова {lang.upper()} виконана:\n\n\"{final_text}\"\n\nУспішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
+    await callback.message.edit_text(f"✅ Твоя розсилка для ГЕО {geo.upper()} | Мова {lang.upper()} виконана:\n\"{final_text}\"\n\nУспішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
     await callback.message.answer("Виберіть наступний напрямок:", reply_markup=get_geo_kb())
     await state.clear()
 
