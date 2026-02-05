@@ -5,37 +5,28 @@ from aiogram.types import CallbackQuery, Message, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 import config
-from keyboards import back_to_geo, get_geo_kb, get_geo_kb_all, get_lang_kb_all, get_yes_no_custom_kb_all
+from keyboards import get_geo_kb, get_lang_kb_all, get_yes_no_custom_kb_all, back_to_lang_all_kb
 
 router = Router()
 
 class CustomAll(StatesGroup):
-    geo = State()
     text = State()
     lang = State()
 
 
 @router.message(Command("all_merchants"))
-async def listening_text_all(message: Message):
-    await message.answer("Виберіть гео для розсилки:", reply_markup=get_geo_kb_all())
+async def cmd_all_merchants(message: Message):
+    await message.answer("Виберіть мову для розсилки:", 
+    reply_markup=get_lang_kb_all()
+)
 
-@router.callback_query(F.data.startswith("all_geo"))
-async def choose_geo_all(callback: CallbackQuery, state: FSMContext):
-    geo_all = callback.data.split('_')[2]
-    await state.update_data(geo=geo_all)
-    await callback.message.edit_text(
-        f"Виберіть мову для розсилки:",
-        reply_markup=get_lang_kb_all()
-    )
-    await callback.answer()
-
-@router.callback_query(F.data.startswith("all_geo"))
-async def choose_lang_all(callback: CallbackQuery, state: FSMContext):
+@router.callback_query(F.data.startswith("all_lang"))
+async def listening_text_all(callback: CallbackQuery, state: FSMContext):
     lang_all = callback.data.split('_')[2]
     await state.update_data(lang=lang_all)
     await callback.message.edit_text(
-        f"Введіть текст для усіх мерчантів",
-        reply_markup=back_to_geo()
+        f"Введіть текст для усіх мерчантів для мови {lang_all.upper()}:", 
+        reply_markup=back_to_lang_all_kb()
     )
     await state.set_state(CustomAll.text)
     await callback.answer()
@@ -45,9 +36,10 @@ async def check_text(message: Message, state: FSMContext):
     await state.update_data(text = message.text)
     data = await state.get_data()
     user_text = data.get('text')
+    lang_all = data.get('lang')
 
     await message.answer(
-        f'Ось твій текст для усіх мерчантів:\n\n\"{user_text}\"\n\n Надсилати?',
+        f'Ось твій текст для усіх мерчантів для мови {lang_all.upper()}:\n\n\"{user_text}\"\n\n Надсилати?',
         reply_markup=get_yes_no_custom_kb_all()
     )
 
@@ -106,7 +98,7 @@ async def send_custom_templeate_all(callback: CallbackQuery, state: FSMContext, 
 
     await callback.answer("Розсилка завершена!")
     await callback.message.edit_text(f"✅ Твоя розсилка для усіх виконана:\n\n\"{final_text}\"\n\nУспішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
-    await callback.message.answer("Виберіть наступний напрямок:", reply_markup=get_geo_kb())
+    await callback.message.answer("Виберіть мову для розсилки усіх:", reply_markup=get_lang_kb_all())
     await state.clear()
 
 
@@ -116,5 +108,14 @@ async def back_to_geo_cancel(callback: CallbackQuery, state: FSMContext):
     await callback.message.edit_text(
         "Виберіть напрямок для інформування:", 
         reply_markup=get_geo_kb()
+    )
+    await callback.answer()
+
+@router.callback_query(F.data == "back_to_lang_all_kb", CustomAll.text)
+async def back_to_lang_all(callback: CallbackQuery, state: FSMContext):
+    await state.clear()
+    await callback.message.edit_text(
+        "Виберіть мову для інформування усіх мерчантів:", 
+        reply_markup=get_lang_kb_all()
     )
     await callback.answer()
