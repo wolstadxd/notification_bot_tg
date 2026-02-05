@@ -4,6 +4,7 @@ from config import TOKEN
 from handlers.admin import router as admin_router
 from handlers.custom import router as custom_router
 from handlers.chat_id import router as chat_router
+from handlers.all_merchants import router as all_merchant_router
 
 async def main():
     bot = Bot(token=TOKEN)
@@ -12,6 +13,7 @@ async def main():
     dp.include_router(custom_router)
     dp.include_router(admin_router)
     dp.include_router(chat_router)
+    dp.include_router(all_merchant_router)
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
