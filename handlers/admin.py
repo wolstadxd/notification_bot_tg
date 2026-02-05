@@ -5,7 +5,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters import Command
 from config import ALLOWED_USERS, TEMPLATES, CHATS, sent_history, write_event_log
 import config
-from keyboards import get_geo_kb, get_template_kb, get_lang_kb
+from keyboards import get_geo_kb, get_template_kb, get_lang_kb, get_lang_kb_all
 
 router = Router()
 
@@ -108,7 +108,7 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
 
 
 @router.callback_query(F.data == "delete_last")
-async def delete_broadcast(callback: CallbackQuery, bot: Bot):
+async def delete_last_broadcast(callback: CallbackQuery, bot: Bot):
     if not config.sent_history:
         await callback.answer("Немає розсилок для видалення", show_alert=True)
         return
@@ -129,6 +129,13 @@ async def delete_broadcast(callback: CallbackQuery, bot: Bot):
         except Exception as e:
             print(f"Не вдалося видалити в {chat_id}: {e}")
 
+    if geo == "all merchants":
+        next_kb = get_lang_kb_all()
+        text_suffix = "вибору мови для всіх мерчантів"
+    else:
+        next_kb = get_geo_kb()
+        text_suffix = "вибору ГЕО"
+
     config.write_event_log('DELETE_LAST', {
         "broadcast_id": last_id,
         "geo": geo,
@@ -140,7 +147,7 @@ async def delete_broadcast(callback: CallbackQuery, bot: Bot):
     
     await callback.answer("Видалено!")
     await callback.message.edit_text(f"🗑 Видалено останню розсилку:\n\nПовідомлень:{deleted_count}\nГЕО: {geo}\nМова: {lang}")
-    await callback.message.answer('Виберіть наступний напрямок:', reply_markup=get_geo_kb())
+    await callback.message.answer(f'Повертаємось до {text_suffix}:', reply_markup=next_kb)
     
 
 @router.callback_query(F.data.startswith('del_'))

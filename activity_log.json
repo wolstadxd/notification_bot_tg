@@ -1870,5 +1870,158 @@
                 "errors": 0
             }
         }
+    },
+    {
+        "timestamp": "2026-02-05 13:00:40",
+        "event": "SEND CUSTOM_ALL",
+        "details": {
+            "broadcast_id": "1878099403184746968",
+            "geo": "all merchants",
+            "lang": "ua",
+            "template": "custom_template:Розсилка має з'явитись у трьох чатах",
+            "results": {
+                "success": 3,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:00:56",
+        "event": "DELETE_SPECIFIC",
+        "details": {
+            "broadcast_id": "1878099403184746968",
+            "geo": "all merchants",
+            "lang": "ua",
+            "template": "custom_template:Розсилка має з'явитись у трьох чатах",
+            "deleted_messages": 3
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:03:02",
+        "event": "SEND CUSTOM_ALL",
+        "details": {
+            "broadcast_id": "1878099400405340537",
+            "geo": "all merchants",
+            "lang": "ua",
+            "template": "custom_template:олотло",
+            "results": {
+                "success": 3,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:05:41",
+        "event": "SEND CUSTOM_ALL",
+        "details": {
+            "broadcast_id": "1878099403315798250",
+            "geo": "all merchants",
+            "lang": "ua",
+            "template": "custom_template:ываыва",
+            "results": {
+                "success": 3,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:05:45",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099403315798250",
+            "geo": "all merchants",
+            "deleted_count": 3
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:26",
+        "event": "SEND CUSTOM_ALL",
+        "details": {
+            "broadcast_id": "1878099402039048298",
+            "geo": "all merchants",
+            "lang": "ua",
+            "template": "custom_template:sdfsdfsdf",
+            "results": {
+                "success": 3,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:28",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099402039048298",
+            "geo": "all merchants",
+            "deleted_count": 3
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:36",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400405340537",
+            "geo": "all merchants",
+            "deleted_count": 3
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:38",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401932790903",
+            "geo": "all merchants",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:39",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400613401084",
+            "geo": "all merchants",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:40",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401328946163",
+            "geo": "all merchants",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:41",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099401045091217",
+            "geo": "all merchants",
+            "deleted_count": 1
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:50",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400339629863",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
+    },
+    {
+        "timestamp": "2026-02-05 13:14:53",
+        "event": "DELETE_LAST",
+        "details": {
+            "broadcast_id": "1878099400339629863",
+            "geo": "PERU",
+            "deleted_count": 1
+        }
     }
 ]
