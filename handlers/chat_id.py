@@ -6,4 +6,4 @@ router = Router()
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
-    await message.answer(f"Привіт! Твій Chat ID: {message.chat.id}")
+    await message.answer(f"Chat ID: {message.chat.id}")
