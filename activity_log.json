@@ -1600,5 +1600,19 @@
                 "errors": 0
             }
         }
+    },
+    {
+        "timestamp": "2026-02-10 11:40:05",
+        "event": "SEND",
+        "details": {
+            "broadcast_id": "1878099400315015359",
+            "geo": "PERU",
+            "lang": "EN",
+            "template": "low_sr",
+            "results": {
+                "success": 1,
+                "errors": 0
+            }
+        }
     }
 ]

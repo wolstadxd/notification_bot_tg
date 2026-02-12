@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime
 
-load_dotenv()  # підтягуємо змінні з .env, якщо файл є
+load_dotenv()
 
 TOKEN = os.getenv("BOT_TOKEN", "")
 if not TOKEN:
@@ -12,7 +12,6 @@ if not TOKEN:
 HISTORY_FILE = "sent_history.json"
 LOG_FILE = "activity_log.json"
 
-# Функція для "Вічної книги" (Пункт 1)
 def write_event_log(event_type, details):
     log_entry = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -32,7 +31,6 @@ def write_event_log(event_type, details):
     with open(LOG_FILE, 'w', encoding='utf-8') as f:
         json.dump(logs, f, ensure_ascii=False, indent=4)
 
-# Функція для збереження "Стікерів" (Пункт 2)
 def save_history(history_data):
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history_data, f, ensure_ascii=False, indent=4)
@@ -54,18 +52,9 @@ def load_history():
 sent_history = load_history()
 
 CHATS = [
-    {"name": "Чат Перу", 
-     "id": -5085462955, 
-     "tags": ["peru", "en"], 
-     "mentions": ["@test1", "@test2"]},
-    {"name": "Чат Перу", 
-    "id": -5229326817, 
-    "tags": ["peru", "ru"],
-     "mentions": ["@test3", "@test4"]},
-    {"name": "Чат Україна", 
-    "id": -5093445860, 
-    "tags": ["ua", "ua"],
-     "mentions": ["@test5", "@test6"]},
+    {"name": "Чат Перу", "id": -5085462955, "tags": ["peru", "en"], "mentions": ["@test1", "@test2"]},
+    {"name": "Чат Перу", "id": -5229326817, "tags": ["peru", "ru"], "mentions": ["@test3", "@test4"]},
+    {"name": "Чат Україна", "id": -5093445860, "tags": ["ua", "ua"], "mentions": ["@test5", "@test6"]},
 ]
 
 ALLOWED_USERS = [437279092, 6812779400]
