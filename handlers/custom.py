@@ -4,7 +4,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import InlineKeyboardButton, Message, CallbackQuery
-from config import CHATS
+from database import load_chats
 import config
 from keyboards import get_geo_kb, get_yes_no_custom_kb, back_to_geo
 
@@ -64,7 +64,8 @@ async def send_custom_templeate(callback: CallbackQuery, state: FSMContext, bot:
     broadcast_id = str(callback.id)
     temp_messages = []
 
-    for chat in CHATS:
+    chats = load_chats()
+    for chat in chats:
         if geo in chat["tags"] and lang in chat["tags"]:
             try:
                 mentions_list = chat.get("mentions", [])

@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+from database import load_chats
 import config
 from keyboards import get_geo_kb, get_lang_kb_all, get_yes_no_custom_kb_all, back_to_lang_all_kb
 
@@ -54,7 +55,8 @@ async def send_custom_templeate_all(callback: CallbackQuery, state: FSMContext, 
     broadcast_id = str(callback.id)
     temp_messages = []
 
-    for chat in config.CHATS:
+    chats = load_chats()
+    for chat in chats:
         if 'merchant' in chat["status"] and all_lang in chat["tags"]:
             try:
                 mentions_list = chat.get("mentions", [])

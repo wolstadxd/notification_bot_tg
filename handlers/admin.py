@@ -3,7 +3,8 @@ from aiogram import Router, F
 from aiogram.types import InlineKeyboardButton, Message, CallbackQuery
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters import Command
-from config import ALLOWED_USERS, TEMPLATES, CHATS, sent_history, write_event_log
+from config import sent_history, write_event_log
+from database import load_chats, load_allowed_users, load_templates
 import config
 from keyboards import get_geo_kb, get_template_kb, get_lang_kb, get_lang_kb_all
 
@@ -11,7 +12,8 @@ router = Router()
 
 @router.message(Command("admin"))
 async def open_admin(message: Message):
-    if message.from_user.id in ALLOWED_USERS:
+    allowed_users = load_allowed_users()
+    if message.from_user.id in allowed_users:
         await message.answer("Виберіть напрямок для інформування:", reply_markup=get_geo_kb())
     else:
         await message.answer("Вибачте, у вас немає доступу до керування розсилкою.")
@@ -31,7 +33,8 @@ async def choose_template(callback: CallbackQuery):
     lang = parts[1]
     geo = parts[2]
 
-    chats_exist = any(geo in chat["tags"] and lang in chat["tags"] for chat in CHATS)
+    chats = load_chats()
+    chats_exist = any(geo in chat["tags"] and lang in chat["tags"] for chat in chats)
 
     if not chats_exist:
         await callback.message.edit_text(
@@ -57,15 +60,17 @@ async def send_broadcast(callback: CallbackQuery, bot: Bot):
     success_count = 0
     error_count = 0
 
+    templates = load_templates()
     try:
-        template_text = config.TEMPLATES[lang][tmpl_type].format(geo=geo.upper())
+        template_text = templates[lang][tmpl_type].format(geo=geo.upper())
     except KeyError:
         await callback.answer("Помилка: Шаблон не знайдено", show_alert=True)
         return
 
     temp_messages = []
 
-    for chat in CHATS:
+    chats = load_chats()
+    for chat in chats:
         if geo in chat["tags"] and lang in chat["tags"]:
             try:
                 mentions_list = chat.get("mentions", [])
