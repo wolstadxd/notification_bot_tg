@@ -8,6 +8,7 @@ router = Router()
 
 def get_admin_menu():
     kb = InlineKeyboardBuilder()
+    kb.row(InlineKeyboardButton(text="🚀 Почати розсилку", callback_data="start_broadcast"))
     kb.row(InlineKeyboardButton(text="📋 Список чатів", callback_data="list_chats_menu"))
     kb.row(InlineKeyboardButton(text="➕ Додати чат", callback_data="add_chat_menu"))
     kb.row(InlineKeyboardButton(text="👥 Керування користувачами", callback_data="manage_users"))
@@ -25,7 +26,7 @@ async def admin_panel_cmd(message: Message):
         "⚙️ **Адмін-панель**\n\n"
         "Оберіть розділ для керування:"
     )
-    await message.answer(text, reply_markup=get_admin_menu(), parse_mode="Markdown")
+    await message.answer(text, reply_markup=get_admin_menu(), parse_mode="HTML")
 
 @router.callback_query(F.data == "admin_menu")
 async def admin_menu_callback(callback: CallbackQuery):
@@ -38,7 +39,18 @@ async def admin_menu_callback(callback: CallbackQuery):
         "⚙️ **Адмін-панель**\n\n"
         "Оберіть розділ для керування:"
     )
-    await callback.message.edit_text(text, reply_markup=get_admin_menu(), parse_mode="Markdown")
+    await callback.message.edit_text(text, reply_markup=get_admin_menu(), parse_mode="HTML")
+    await callback.answer()
+
+
+@router.callback_query(F.data == "start_broadcast")
+async def start_broadcast_callback(callback: CallbackQuery):
+
+    await callback.message.edit_text(
+        "📝 Щоб налаштувати та запустити розсилку, використайте команду /new_cast",
+        parse_mode="HTML",
+        reply_markup=get_admin_menu(),
+    )
     await callback.answer()
 
 @router.callback_query(F.data == "add_chat_menu")
@@ -68,5 +80,5 @@ async def list_chats_menu(callback: CallbackQuery):
             kb.row(*[InlineKeyboardButton(text=btn.text, callback_data=btn.callback_data) for btn in row])
     kb.row(InlineKeyboardButton(text="⬅️ Назад до меню", callback_data="admin_menu"))
     
-    await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="Markdown")
+    await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="HTML")
     await callback.answer()

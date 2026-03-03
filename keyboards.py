@@ -2,13 +2,6 @@ from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-def get_geo_kb():
-    builder = InlineKeyboardBuilder()
-    builder.row(InlineKeyboardButton(text="🇵🇪 Перу", callback_data="geo_peru"))
-    builder.row(InlineKeyboardButton(text="🇺🇦 Україна", callback_data="geo_ua"))
-    builder.row(InlineKeyboardButton(text="🗑 Видалити останню розсилку", callback_data="delete_last"))
-    return builder.as_markup()
-
 def get_template_kb(lang, geo):
     builder = InlineKeyboardBuilder()
     builder.row(InlineKeyboardButton(text="Створили свою розсилку", callback_data=f"custom_{geo}_{lang}"))

@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from database import load_chats
 import config
-from keyboards import get_geo_kb, get_lang_kb_all, get_yes_no_custom_kb_all, back_to_lang_all_kb
+from keyboards import get_lang_kb_all, get_yes_no_custom_kb_all, back_to_lang_all_kb
 
 router = Router()
 
@@ -66,7 +66,7 @@ async def send_custom_templeate_all(callback: CallbackQuery, state: FSMContext, 
                 msg = await bot.send_message(
                     chat_id=chat["id"], 
                     text=full_message_text,
-                    parse_mode="Markdown"
+                    parse_mode="HTML"
                 )
 
                 temp_messages.append((chat["id"], msg.message_id))
@@ -102,16 +102,6 @@ async def send_custom_templeate_all(callback: CallbackQuery, state: FSMContext, 
     await callback.message.edit_text(f"✅ Твоя розсилка для усіх виконана:\n\n\"{final_text}\"\n\nУспішно відправлено: {success_count}, Невдач: {error_count}", reply_markup=delete_kb.as_markup())
     await callback.message.answer("Виберіть мову для розсилки усіх:", reply_markup=get_lang_kb_all())
     await state.clear()
-
-
-@router.callback_query(F.data == "back_to_geo", CustomAll.text)
-async def back_to_geo_cancel(callback: CallbackQuery, state: FSMContext):
-    await state.clear()
-    await callback.message.edit_text(
-        "Виберіть напрямок для інформування:", 
-        reply_markup=get_geo_kb()
-    )
-    await callback.answer()
 
 @router.callback_query(F.data == "back_to_lang_all_kb", CustomAll.text)
 async def back_to_lang_all(callback: CallbackQuery, state: FSMContext):

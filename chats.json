@@ -39,11 +39,14 @@
         "status": "merchant"
     },
     {
-        "name": "chat ua en",
+        "name": "LF TEST 4 CL_EN",
         "id": -5243434965,
         "tags": [
+            "cl",
             "ua",
-            "en"
+            "mach",
+            "khipu",
+            "p2p_vip"
         ],
         "mentions": [],
         "status": "merchant"

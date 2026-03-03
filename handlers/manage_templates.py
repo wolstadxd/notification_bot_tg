@@ -49,7 +49,7 @@ async def manage_templates_cmd(message: Message):
         return
     
     text, reply_markup = get_templates_list_data()
-    await message.answer(text, reply_markup=reply_markup, parse_mode="Markdown")
+    await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
 
 @router.callback_query(F.data == "manage_templates")
 async def manage_templates_callback(callback: CallbackQuery):
@@ -60,7 +60,7 @@ async def manage_templates_callback(callback: CallbackQuery):
         return
     
     text, reply_markup = get_templates_list_data()
-    await callback.message.edit_text(text, reply_markup=reply_markup, parse_mode="Markdown")
+    await callback.message.edit_text(text, reply_markup=reply_markup, parse_mode="HTML")
     await callback.answer()
 
 @router.callback_query(F.data == "add_template")
@@ -111,7 +111,7 @@ async def process_add_template_text(message: Message, state: FSMContext):
     await message.answer(f"✅ Шаблон `{template_type}` для мови `{lang}` успішно додано!")
     
     text, reply_markup = get_templates_list_data()
-    await message.answer(text, reply_markup=reply_markup, parse_mode="Markdown")
+    await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
     
     await state.clear()
 
@@ -171,18 +171,12 @@ async def process_edit_template_text(message: Message, state: FSMContext):
     await message.answer(f"✅ Шаблон `{template_type}` для мови `{lang}` успішно оновлено!")
     
     text, reply_markup = get_templates_list_data()
-    await message.answer(text, reply_markup=reply_markup, parse_mode="Markdown")
+    await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
     
     await state.clear()
 
 @router.callback_query(F.data == "delete_template")
 async def delete_template_start(callback: CallbackQuery, state: FSMContext):
-    from database import load_allowed_users
-    current_users = load_allowed_users()
-    if callback.from_user.id not in current_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
-        return
-    
     templates = load_templates()
     if not templates:
         await callback.answer("📭 Шаблони відсутні", show_alert=True)
@@ -194,14 +188,14 @@ async def delete_template_start(callback: CallbackQuery, state: FSMContext):
         for template_type in lang_templates.keys():
             kb.row(InlineKeyboardButton(
                 text=f"{lang.upper()}: {template_type}",
-                callback_data=f"del_tmpl_{lang}_{template_type}"
+                callback_data=f"rem_tmpl_{lang}_{template_type}"
             ))
     kb.row(InlineKeyboardButton(text="🚫 Скасувати", callback_data="cancel_delete_template"))
     
     await callback.message.edit_text("🗑 Оберіть шаблон для видалення:", reply_markup=kb.as_markup())
     await callback.answer()
 
-@router.callback_query(F.data.startswith("del_tmpl_"))
+@router.callback_query(F.data.startswith("rem_tmpl_"))
 async def confirm_delete_template(callback: CallbackQuery):
     parts = callback.data.split("_")
     lang = parts[2]
@@ -217,18 +211,18 @@ async def confirm_delete_template(callback: CallbackQuery):
     kb = InlineKeyboardBuilder()
     kb.row(InlineKeyboardButton(
         text="✅ ТАК, ВИДАЛИТИ",
-        callback_data=f"confirm_del_tmpl_{lang}_{template_type}"
+        callback_data=f"cfm_del_tmpl_{lang}_{template_type}"
     ))
     kb.row(InlineKeyboardButton(text="🚫 Скасувати", callback_data="manage_templates"))
     
     await callback.message.edit_text(
         f"⚠️ Ви впевнені, що хочете видалити шаблон `{template_type}` для мови `{lang}`?",
         reply_markup=kb.as_markup(),
-        parse_mode="Markdown"
+        parse_mode="HTML"
     )
     await callback.answer()
 
-@router.callback_query(F.data.startswith("confirm_del_tmpl_"))
+@router.callback_query(F.data.startswith("cfm_del_tmpl_"))
 async def real_delete_template(callback: CallbackQuery):
     parts = callback.data.split("_")
     lang = parts[3]
@@ -253,5 +247,5 @@ async def real_delete_template(callback: CallbackQuery):
 @router.callback_query(F.data == "cancel_delete_template")
 async def cancel_delete_template(callback: CallbackQuery):
     text, reply_markup = get_templates_list_data()
-    await callback.message.edit_text(text, reply_markup=reply_markup, parse_mode="Markdown")
+    await callback.message.edit_text(text, reply_markup=reply_markup, parse_mode="HTML")
     await callback.answer()

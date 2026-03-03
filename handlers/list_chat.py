@@ -24,7 +24,7 @@ def get_list_data():
 @router.message(Command("list_chats"))
 async def list_chats_cmd(message: Message):
     text, reply_markup = get_list_data()
-    await message.answer(text, reply_markup=reply_markup, parse_mode="Markdown")
+    await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
 
 # Для кнопки "Назад" (редагування існуючого повідомлення)
 @router.callback_query(F.data == "back_to_list")
@@ -33,7 +33,7 @@ async def back_to_list(callback: CallbackQuery):
     await callback.message.edit_text(
         text=text, 
         reply_markup=reply_markup, 
-        parse_mode="Markdown"
+        parse_mode="HTML"
     )
 
 @router.callback_query(F.data.startswith("manage_chat_"))
@@ -55,12 +55,14 @@ async def manage_chat_menu(callback: CallbackQuery):
         f"📊 Статус: `{chat.get('status', 'не визначено')}`\n")
 
     kb = InlineKeyboardBuilder()
+    # Кнопка редагування
+    kb.row(InlineKeyboardButton(text="✏️ Редагувати чат", callback_data=f"edit_chat_{chat_id}"))
     # Кнопка видалення (веде на підтвердження)
     kb.row(InlineKeyboardButton(text="🗑 Видалити чат", callback_data=f"confirm_drop_{chat_id}"))
     # Кнопка повернення назад до списку
     kb.row(InlineKeyboardButton(text="⬅️ Назад до списку", callback_data="back_to_list"))
     
-    await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="Markdown")
+    await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="HTML")
 
 @router.callback_query(F.data.startswith("confirm_drop_"))
 async def confirm_drop(callback: CallbackQuery):
@@ -73,7 +75,7 @@ async def confirm_drop(callback: CallbackQuery):
     await callback.message.edit_text(
         f"⚠️ Ви впевнені, що хочете видалити чат `{chat_id}`? Цю дію неможливо скасувати.",
         reply_markup=kb.as_markup(),
-        parse_mode="Markdown"
+        parse_mode="HTML"
     )
 
 @router.callback_query(F.data.startswith("real_drop_"))
@@ -98,5 +100,5 @@ async def back_to_list(callback: CallbackQuery):
     await callback.message.edit_text(
         text=text, 
         reply_markup=reply_markup, 
-        parse_mode="Markdown"
+        parse_mode="HTML"
     )
