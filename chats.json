@@ -4,12 +4,10 @@
         "id": -5085462955,
         "tags": [
             "peru",
-            "en"
+            "en",
+            "yape"
         ],
-        "mentions": [
-            "@test1",
-            "@test2"
-        ],
+        "mentions": [],
         "status": "merchant"
     },
     {
