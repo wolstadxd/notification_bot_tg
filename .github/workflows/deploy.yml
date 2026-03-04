@@ -1,0 +1,36 @@
+name: Build and Push Bot
+
+on:
+  push:
+    branches: [ "main" ] # Спрацьовує при пуші в гілку main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Назва образу буде: ghcr.io/твій-юзернейм/назва-репозиторія:latest
+          tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+          # Цей крок важливий для сумісності Mac (ARM) та Сервера (AMD64)
+          platforms: linux/amd64
