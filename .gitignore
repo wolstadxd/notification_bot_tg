@@ -2,6 +2,7 @@
 .env
 
 # Bot data
+activity_log.json
 sent_history.json
 
 # Python

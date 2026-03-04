@@ -1,0 +1,18 @@
+{
+    "ua": {
+        "low_sr": "тестовий шаблон юа лов ср",
+        "tech": "⚙️ **Техроботи**\nНа стороні банку-партнера в {geo} проводяться планові роботи. ETA: 2 години.",
+        "fixed": "✅ **Відновлено**\nРобота по напрямку {geo} стабілізована. Все працює в штатному режимі.",
+        "p2p_limits": "Колеги, наразі напрямок поповнень P2P працює штатно на суми від 1000 UAH."
+    },
+    "ru": {
+        "low_sr": "📉 **Low Success Rate**\nНаблюдается снижение конверсии по направлению {geo}. Технический отдел уже занимается.",
+        "tech": "⚙️ **Техработы**\nНа стороне банка-партнера в {geo} проводятся плановые работы. ETA: 2 часа.",
+        "quasi_stop": "Коллеги, на данный момент фиксируем сложности по направлению квази пополнений UAH, по обновлению уведомим."
+    },
+    "en": {
+        "low_sr": "📉 **Low Success Rate**\nConversion drop detected for {geo}. Technical department is already investigating.",
+        "tech": "⚙️ **Maintenance**\nScheduled maintenance on the partner bank's side in {geo}. ETA: 2 hours.",
+        "fixed": "✅ Restored\nOperations for {geo} have been stabilized. Everything is working normally"
+    }
+}

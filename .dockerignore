@@ -1,0 +1,8 @@
+venv
+__pycache__
+*.pyc
+.git
+.env
+activity_logs.json
+templates.json
+sent_history.json
