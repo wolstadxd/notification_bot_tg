@@ -1,9 +1,12 @@
 import json
 import os
 
-CHATS_FILE = "chats.json"
-ALLOWED_USERS_FILE = "allowed_users.json"
-TEMPLATES_FILE = "templates.json"
+DATA_DIR = os.getenv("DATA_DIR", "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+CHATS_FILE = os.path.join(DATA_DIR, "chats.json")
+ALLOWED_USERS_FILE = os.path.join(DATA_DIR, "allowed_users.json")
+TEMPLATES_FILE = os.path.join(DATA_DIR, "templates.json")
 
 # Функції для роботи з чатами
 def load_chats():

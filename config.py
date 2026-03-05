@@ -9,8 +9,11 @@ TOKEN = os.getenv("BOT_TOKEN", "")
 if not TOKEN:
     raise RuntimeError("BOT_TOKEN env var is not set")
 
-HISTORY_FILE = "sent_history.json"
-LOG_FILE = "activity_log.json"
+DATA_DIR = os.getenv("DATA_DIR", "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+HISTORY_FILE = os.path.join(DATA_DIR, "sent_history.json")
+LOG_FILE = os.path.join(DATA_DIR, "activity_log.json")
 
 def write_event_log(event_type, details):
     log_entry = {
