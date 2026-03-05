@@ -1,8 +1,8 @@
-name: Build and Push Bot
+name: CI/CD
 
 on:
   push:
-    branches: [ "main" ] # Спрацьовує при пуші в гілку main
+    branches: ["main"]
 
 jobs:
   build:
@@ -30,7 +30,30 @@ jobs:
         with:
           context: .
           push: true
-          # Назва образу буде: ghcr.io/твій-юзернейм/назва-репозиторія:latest
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
-          # Цей крок важливий для сумісності Mac (ARM) та Сервера (AMD64)
           platforms: linux/amd64
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ~/notification_bot_tg
+            cat > .env << 'ENVFILE'
+            BOT_TOKEN=${{ secrets.BOT_TOKEN }}
+            ENVFILE
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            docker compose pull
+            docker compose up -d
+            docker image prune -f
