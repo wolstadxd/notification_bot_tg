@@ -2,6 +2,7 @@ from aiogram import Router, F
 from database import load_chats
 from aiogram.types import Message
 from aiogram.filters import Command
+from database import load_allowed_users
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
 from aiogram.types import InlineKeyboardButton, Message, CallbackQuery
 from database import load_chats, save_chats
@@ -23,6 +24,10 @@ def get_list_data():
 
 @router.message(Command("list_chats"))
 async def list_chats_cmd(message: Message):
+    allowed_users = load_allowed_users()
+    if message.from_user.id not in allowed_users:
+        await message.answer("❌ У вас немає доступу")
+        return
     text, reply_markup = get_list_data()
     await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
 

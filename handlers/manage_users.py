@@ -32,7 +32,10 @@ def get_users_list_data():
 
 @router.message(Command("manage_users"))
 async def manage_users_cmd(message: Message):
-    
+    allowed_users = load_allowed_users()
+    if message.from_user.id not in allowed_users:
+        await message.answer("❌ У вас немає доступу")
+        return
     text, reply_markup = get_users_list_data()
     await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
 

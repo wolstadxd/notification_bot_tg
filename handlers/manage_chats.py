@@ -5,6 +5,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
 from aiogram.filters import Command
+from typing import Union
 from handlers.admin_menu import get_admin_menu
 router = Router()
 
@@ -23,25 +24,43 @@ class EditChat(StatesGroup):
 
 @router.message(Command("cancel_action"))
 @router.callback_query(F.data == "cancel_action")
-async def cancel_handler(callback: CallbackQuery, state: FSMContext):
-    # 1. Очищуємо будь-який активний стан (FSM)
+async def cancel_handler(event: Union[Message, CallbackQuery], state: FSMContext):
+    # 1. Визначаємо, хто пише (event може бути і Message, і CallbackQuery)
+    user_id = event.from_user.id
+    allowed_users = load_allowed_users()
+    if user_id not in allowed_users:
+        if isinstance(event, Message):
+            await event.answer("❌ У вас немає доступу")
+        else:
+            await event.answer("❌ У вас немає доступу")
+        return
+
     await state.clear()
     
-    # 2. Показуємо коротке повідомлення зверху (опціонально)
-    await callback.answer("Дію скасовано")
-    
-    # 3. Редагуємо поточне повідомлення, повертаючи головне меню
-    await callback.message.answer(
-         "⚙️ **Адмін-панель**\n\n"
-        "Оберіть розділ для керування:",
-        reply_markup=get_admin_menu(),
-        parse_mode="HTML"
-    )
+    # 3. Логіка відповіді
+    if isinstance(event, CallbackQuery):
+        await event.answer("Дію скасовано")
+        # Використовуємо event.message, бо в CallbackQuery текст лежить там
+        await event.message.answer(
+            "⚙️ <b>Адмін-панель</b>\n\nОберіть розділ для керування:",
+            reply_markup=get_admin_menu(),
+            parse_mode="HTML"
+        )
+    else:
+        # Якщо це була команда /cancel_action текстом
+        await event.answer(
+            "⚙️ <b>Адмін-панель</b>\n\nОберіть розділ для керування:",
+            reply_markup=get_admin_menu(),
+            parse_mode="HTML"
+        )
 
 @router.message(Command("add_chat"))
 async def start_add_chat(message: Message, state: FSMContext):
+    allowed_users = load_allowed_users()
+    if message.from_user.id not in allowed_users:
+        await message.answer("❌ У вас немає доступу")
+        return
     await state.set_state(AddChat.name)
-    
     kb = InlineKeyboardBuilder()
     kb.row(InlineKeyboardButton(text="❌ Скасувати", callback_data="cancel_action"))
     
