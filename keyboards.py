@@ -14,13 +14,13 @@ def get_template_kb(lang, geo):
 def get_yes_no_custom_kb():
     builder = InlineKeyboardBuilder()
     builder.add(InlineKeyboardButton(text="Так, відправити", callback_data="yes_custom"))
-    builder.add(InlineKeyboardButton(text="Ні, повернутись до ГЕО", callback_data="no_custom"))
+    builder.add(InlineKeyboardButton(text="Ні, повернутись до ГЕО", callback_data="cancel_action"))
     return builder.as_markup()
 
 def get_yes_no_custom_kb_all():
     builder = InlineKeyboardBuilder()
     builder.add(InlineKeyboardButton(text="Так, відправити", callback_data="all_yes_custom"))
-    builder.add(InlineKeyboardButton(text="Ні, повернутись до ГЕО", callback_data="no_custom"))
+    builder.add(InlineKeyboardButton(text="Ні, повернутись до ГЕО", callback_data="cancel_action"))
     return builder.as_markup()
 
 def get_lang_kb(geo: str):

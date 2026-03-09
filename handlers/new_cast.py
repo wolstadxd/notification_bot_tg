@@ -9,7 +9,7 @@ from handlers.states import BroadcastStates
 from config import sent_history, write_event_log
 from database import load_chats, load_allowed_users, load_templates
 import config
-from keyboards import get_yes_no_custom_kb, get_template_kb, get_lang_kb, get_lang_kb_all
+from keyboards import get_template_kb, get_lang_kb, get_lang_kb_all
 
 router = Router()
 

@@ -41,7 +41,7 @@ async def cancel_handler(event: Union[Message, CallbackQuery], state: FSMContext
     if isinstance(event, CallbackQuery):
         await event.answer("Дію скасовано")
         # Використовуємо event.message, бо в CallbackQuery текст лежить там
-        await event.message.answer(
+        await event.message.edit_text(
             "⚙️ <b>Адмін-панель</b>\n\nОберіть розділ для керування:",
             reply_markup=get_admin_menu(),
             parse_mode="HTML"
