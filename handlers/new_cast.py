@@ -40,7 +40,10 @@ def get_active_tags(filter_list=None, step="geo"):
 
 @router.message(Command("new_cast"))
 async def start_broadcast(message: Message, state: FSMContext):
-
+    allowed_users = load_allowed_users()
+    if message.from_user.id not in allowed_users:
+        await message.answer("❌ У вас немає доступу")
+        return
     await state.clear()
     
     geos = get_active_tags(step="geo")

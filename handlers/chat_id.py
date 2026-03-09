@@ -9,6 +9,6 @@ router = Router()
 async def cmd_start(message: Message):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу до боту")
+        await message.answer("❌ У вас немає доступу")
         return
     await message.answer(f"Chat ID: {message.chat.id}")

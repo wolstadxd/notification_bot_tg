@@ -19,7 +19,7 @@ def get_admin_menu():
 async def admin_panel_cmd(message: Message):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу до адмін-панелі.")
+        await message.answer("❌ У вас немає доступу")
         return
     
     text = (

@@ -3,6 +3,7 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, InlineKeyboardButton
 from aiogram.filters import Command
+from database import load_allowed_users
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from database import load_chats
 import config
@@ -17,6 +18,10 @@ class CustomAll(StatesGroup):
 
 @router.message(Command("all_merchants"))
 async def cmd_all_merchants(message: Message):
+    allowed_users = load_allowed_users()
+    if message.from_user.id not in allowed_users:
+        await message.answer("❌ У вас немає доступу")
+        return
     await message.answer("Виберіть мову для розсилки:", 
     reply_markup=get_lang_kb_all()
 )

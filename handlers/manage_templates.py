@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, CallbackQuery
 from aiogram.filters import Command
+from database import load_allowed_users
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
 
 router = Router()
@@ -39,13 +40,11 @@ def get_templates_list_data():
     
     return text, kb.as_markup()
 
-@router.message(Command("manage_templates"))
+@router.message(Command("."))
 async def manage_templates_cmd(message: Message):
-    # Перевірка доступу
-    from database import load_allowed_users
-    current_users = load_allowed_users()
-    if message.from_user.id not in current_users:
-        await message.answer("❌ У вас немає доступу до цієї команди.")
+    allowed_users = load_allowed_users()
+    if message.from_user.id not in allowed_users:
+        await message.answer("❌ У вас немає доступу")
         return
     
     text, reply_markup = get_templates_list_data()
