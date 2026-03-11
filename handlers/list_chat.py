@@ -6,6 +6,7 @@ from database import load_allowed_users
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
 from aiogram.types import InlineKeyboardButton, Message, CallbackQuery
 from database import load_chats, save_chats
+import html
 
 router = Router()
 
@@ -52,8 +53,9 @@ async def manage_chat_menu(callback: CallbackQuery):
     if not chat:
         await callback.answer("❌ Чат не знайдено", show_alert=True)
         return
-
-    text = (f"⚙️ **Керування чатом:** {chat['name']}\n\n"
+    
+    safe_name = html.escape(chat['name'])
+    text = (f"⚙️ **Керування чатом:** {safe_name}\n\n"
         f"🆔 `{chat['id']}`\n"
         f"🏷 Теги: {', '.join(chat['tags'])}\n"
         f"👤 Меншини: {', '.join(chat['mentions']) if chat['mentions'] else 'немає'}\n"

@@ -7,6 +7,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
 from aiogram.filters import Command
 from typing import Union
 from handlers.admin_menu import get_admin_menu
+import html
 router = Router()
 
 class AddChat(StatesGroup):
@@ -153,9 +154,11 @@ async def start_edit_chat(callback: CallbackQuery, state: FSMContext):
     kb = InlineKeyboardBuilder()
     kb.row(InlineKeyboardButton(text="❌ Скасувати", callback_data="cancel_action"))
     
+    safe_name = html.escape(chat["name"])
+    
     await callback.message.edit_text(
         "✏️ Редагування чату:\n\n"
-        f"Поточна назва: {chat['name']}\n"
+        f"Поточна назва: {safe_name}\n"
         "Введіть нову назву чату (або надішліть ту ж саму):",
         parse_mode="HTML",
         reply_markup=kb.as_markup()
