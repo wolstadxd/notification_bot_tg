@@ -40,6 +40,12 @@ jobs:
       contents: read
       packages: write
 
+    strategy:
+      matrix:
+        environment: [Corytech, Finteca]
+
+    environment: ${{ matrix.environment }}
+
     steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.0
@@ -49,10 +55,26 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd ~/notification_bot_tg
+            DEPLOY_DIR=~/notification_bot_tg/${{ matrix.environment }}
+            mkdir -p "$DEPLOY_DIR/data"
+            cd "$DEPLOY_DIR"
+
             cat > .env << 'ENVFILE'
             BOT_TOKEN=${{ secrets.BOT_TOKEN }}
             ENVFILE
+
+            cat > docker-compose.yml << 'COMPOSE'
+            services:
+              bot:
+                image: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+                container_name: notification_bot_tg_${{ matrix.environment }}
+                restart: unless-stopped
+                env_file:
+                  - .env
+                volumes:
+                  - ./data:/app/data
+            COMPOSE
+
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker compose pull
             docker compose up -d
