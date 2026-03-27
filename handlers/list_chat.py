@@ -27,7 +27,7 @@ def get_list_data():
 async def list_chats_cmd(message: Message):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу")
+        await message.answer("❌ You don't have access")
         return
     text, reply_markup = get_list_data()
     await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")

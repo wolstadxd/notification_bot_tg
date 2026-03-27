@@ -31,9 +31,9 @@ async def cancel_handler(event: Union[Message, CallbackQuery], state: FSMContext
     allowed_users = load_allowed_users()
     if user_id not in allowed_users:
         if isinstance(event, Message):
-            await event.answer("❌ У вас немає доступу")
+            await event.answer("❌ You don't have access")
         else:
-            await event.answer("❌ У вас немає доступу")
+            await event.answer("❌ You don't have access")
         return
 
     await state.clear()
@@ -59,7 +59,7 @@ async def cancel_handler(event: Union[Message, CallbackQuery], state: FSMContext
 async def start_add_chat(message: Message, state: FSMContext):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу")
+        await message.answer("❌ You don't have access")
         return
     await state.set_state(AddChat.name)
     kb = InlineKeyboardBuilder()

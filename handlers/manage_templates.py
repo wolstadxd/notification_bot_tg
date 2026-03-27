@@ -44,7 +44,7 @@ def get_templates_list_data():
 async def manage_templates_cmd(message: Message):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу")
+        await message.answer("❌ You don't have access")
         return
     
     text, reply_markup = get_templates_list_data()
@@ -55,7 +55,7 @@ async def manage_templates_callback(callback: CallbackQuery):
     from database import load_allowed_users
     current_users = load_allowed_users()
     if callback.from_user.id not in current_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
+        await callback.answer("❌ You don't have access", show_alert=True)
         return
     
     text, reply_markup = get_templates_list_data()
@@ -67,7 +67,7 @@ async def add_template_start(callback: CallbackQuery, state: FSMContext):
     from database import load_allowed_users
     current_users = load_allowed_users()
     if callback.from_user.id not in current_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
+        await callback.answer("❌ You don't have access", show_alert=True)
         return
     
     await callback.message.edit_text("📝 Введіть мову шаблону (ua/ru/en):")
@@ -119,7 +119,7 @@ async def edit_template_start(callback: CallbackQuery, state: FSMContext):
     from database import load_allowed_users
     current_users = load_allowed_users()
     if callback.from_user.id not in current_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
+        await callback.answer("❌ You don't have access", show_alert=True)
         return
     
     await callback.message.edit_text("📝 Введіть мову шаблону (ua/ru/en):")

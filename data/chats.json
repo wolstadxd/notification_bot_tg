@@ -38,13 +38,25 @@
     },
     {
         "name": "LF TEST<>4 CL_EN5",
-        "id": -5243434965,
+        "id": -1003581526820,
         "tags": [
             "cl",
             "ua",
             "mach",
             "khipu",
             "p2p_vip"
+        ],
+        "mentions": [],
+        "status": "merchant"
+    },
+    {
+        "name": "Test chat 9 dig",
+        "id": -697405535,
+        "tags": [
+            "peru",
+            "ua",
+            "khipu",
+            "vip"
         ],
         "mentions": [],
         "status": "merchant"

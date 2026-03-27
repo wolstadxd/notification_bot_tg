@@ -19,7 +19,7 @@ def get_admin_menu():
 async def admin_panel_cmd(message: Message):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу")
+        await message.answer("❌ You don't have access")
         return
     
     text = (
@@ -32,7 +32,7 @@ async def admin_panel_cmd(message: Message):
 async def admin_menu_callback(callback: CallbackQuery):
     allowed_users = load_allowed_users()
     if callback.from_user.id not in allowed_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
+        await callback.answer("❌ You don't have access", show_alert=True)
         return
     
     text = (
@@ -57,7 +57,7 @@ async def start_broadcast_callback(callback: CallbackQuery):
 async def add_chat_menu(callback: CallbackQuery):
     allowed_users = load_allowed_users()
     if callback.from_user.id not in allowed_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
+        await callback.answer("❌ You don't have access", show_alert=True)
         return
     
     await callback.message.edit_text("📝 Використайте команду /add_chat для додавання нового чату")
@@ -69,7 +69,7 @@ async def list_chats_menu(callback: CallbackQuery):
     
     allowed_users = load_allowed_users()
     if callback.from_user.id not in allowed_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
+        await callback.answer("❌ You don't have access", show_alert=True)
         return
     
     text, reply_markup = get_list_data()

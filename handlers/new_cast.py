@@ -42,7 +42,7 @@ def get_active_tags(filter_list=None, step="geo"):
 async def start_broadcast(message: Message, state: FSMContext):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу")
+        await message.answer("❌ You don't have access")
         return
     await state.clear()
     

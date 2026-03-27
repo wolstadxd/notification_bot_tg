@@ -34,7 +34,7 @@ def get_users_list_data():
 async def manage_users_cmd(message: Message):
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
-        await message.answer("❌ У вас немає доступу")
+        await message.answer("❌ You don't have access")
         return
     text, reply_markup = get_users_list_data()
     await message.answer(text, reply_markup=reply_markup, parse_mode="HTML")
@@ -43,7 +43,7 @@ async def manage_users_cmd(message: Message):
 async def manage_users_callback(callback: CallbackQuery):
     current_users = load_allowed_users()
     if callback.from_user.id not in current_users:
-        await callback.answer("❌ У вас немає доступу", show_alert=True)
+        await callback.answer("❌ You don't have access", show_alert=True)
         return
     
     text, reply_markup = get_users_list_data()
@@ -63,7 +63,7 @@ async def add_user_start(callback: CallbackQuery, state: FSMContext):
 async def process_add_user(message: Message, state: FSMContext):
     current_users = load_allowed_users()
     if message.from_user.id not in current_users:
-        await message.answer("❌ У вас немає доступу до цієї команди.")
+        await message.answer("❌ You don't have access до цієї команди.")
         await state.clear()
         return
     
@@ -107,7 +107,7 @@ async def remove_user_start(callback: CallbackQuery, state: FSMContext):
 async def process_remove_user(message: Message, state: FSMContext):
     current_users = load_allowed_users()
     if message.from_user.id not in current_users:
-        await message.answer("❌ У вас немає доступу до цієї команди.")
+        await message.answer("❌ You don't have access до цієї команди.")
         await state.clear()
         return
     
