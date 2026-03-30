@@ -67,7 +67,7 @@ async def manage_chat_menu(callback: CallbackQuery):
     # Кнопка видалення (веде на підтвердження)
     kb.row(InlineKeyboardButton(text="🗑 Видалити чат", callback_data=f"confirm_drop_{chat_id}"))
     # Кнопка повернення назад до списку
-    kb.row(InlineKeyboardButton(text="⬅️ Назад до списку", callback_data="back_to_list"))
+    kb.row(InlineKeyboardButton(text="⬅️ Назад до списку", callback_data="list_chats_menu"))
     
     await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="HTML")
 

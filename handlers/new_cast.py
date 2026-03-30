@@ -242,7 +242,7 @@ async def execute_broadcast(callback: CallbackQuery, state: FSMContext, bot: Bot
         f"📊 Результати:\n"
         f"✅ Успішно: {success}\n"
         f"❌ Помилок: {errors}\n\n"
-        f"Фільтр: {geo.upper()} | {lang.upper()} | {method.upper()}",
+        f"Фільтр: {geo.upper()} | {lang.upper()} | {method.upper()} | {tmpl_type.upper()}",
         parse_mode="HTML",
         reply_markup=delete_kb.as_markup()
 
