@@ -5,6 +5,10 @@ from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
 from config import LOG_FILE, HISTORY_FILE
 import os
+import config
+from aiogram.fsm.context import FSMContext
+from handlers.states import BroadcastStates
+from handlers.new_cast import get_active_tags
 router = Router()
 
 def get_admin_menu():
@@ -46,13 +50,30 @@ async def admin_menu_callback(callback: CallbackQuery):
 
 
 @router.callback_query(F.data == "start_broadcast")
-async def start_broadcast_callback(callback: CallbackQuery):
+async def start_broadcast_callback(callback: CallbackQuery, state: FSMContext):
+    allowed_users = load_allowed_users()
+    if callback.from_user.id not in allowed_users:
+        await callback.answer("❌ You don't have access", show_alert=True)
+        return
+        
+    await state.clear()
+    geos = get_active_tags(step="geo")
+    if not geos:
+        await callback.message.edit_text("В базі немає чатів.", reply_markup=get_admin_menu())
+        await callback.answer()
+        return
 
-    await callback.message.edit_text(
-        "📝 Щоб налаштувати та запустити розсилку, використайте команду /new_cast",
-        parse_mode="HTML",
-        reply_markup=get_admin_menu(),
-    )
+    kb = InlineKeyboardBuilder()
+    for geo in geos:
+        kb.row(InlineKeyboardButton(text=f"📍 {geo.upper()}", callback_data=f"b_geo_{geo}"))
+    
+    if config.sent_history:
+        kb.row(InlineKeyboardButton(text="🗑 Видалити останню розсилку", callback_data="delete_last_broadcast"))
+
+    kb.row(InlineKeyboardButton(text="⬅️ Назад до меню", callback_data="admin_menu"))
+
+    await state.set_state(BroadcastStates.choosing_geo)
+    await callback.message.edit_text("Виберіть ГЕО для розсилки:", reply_markup=kb.as_markup())
     await callback.answer()
 
 @router.callback_query(F.data == "add_chat_menu")
