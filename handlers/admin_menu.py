@@ -1,9 +1,10 @@
 from aiogram import Router, F
 from database import load_allowed_users
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
-
+from config import LOG_FILE, HISTORY_FILE
+import os
 router = Router()
 
 def get_admin_menu():
@@ -13,6 +14,7 @@ def get_admin_menu():
     kb.row(InlineKeyboardButton(text="➕ Додати чат", callback_data="add_chat_menu"))
     kb.row(InlineKeyboardButton(text="👥 Керування користувачами", callback_data="manage_users"))
     kb.row(InlineKeyboardButton(text="📝 Керування шаблонами", callback_data="manage_templates"))
+    kb.row(InlineKeyboardButton(text="📁 Завантажити логи", callback_data="download_logs"))
     return kb.as_markup()
 
 @router.message(Command("admin_panel"))
@@ -82,3 +84,22 @@ async def list_chats_menu(callback: CallbackQuery):
     
     await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="HTML")
     await callback.answer()
+
+@router.callback_query(F.data == "download_logs")
+async def download_logs_callback(callback: CallbackQuery):
+    allowed_users = load_allowed_users()
+    if callback.from_user.id not in allowed_users:
+        await callback.answer("❌ You don't have access", show_alert=True)
+        return
+
+    await callback.answer("Завантаження файлів...", show_alert=False)
+    
+    if os.path.exists(LOG_FILE):
+        await callback.message.answer_document(FSInputFile(LOG_FILE))
+    else:
+        await callback.message.answer("Файл activity_log.json не знайдено.")
+
+    if os.path.exists(HISTORY_FILE):
+        await callback.message.answer_document(FSInputFile(HISTORY_FILE))
+    else:
+        await callback.message.answer("Файл sent_history.json не знайдено.")
