@@ -109,12 +109,6 @@ async def process_mentions(message: Message, state: FSMContext):
     # 1. Завантажуємо поточний список
     all_chats = load_chats()
     
-    # 2. Перевіряємо, чи немає вже такого ID (захист від дублів)
-    if any(chat['id'] == new_chat['id'] for chat in all_chats):
-        await message.answer("❌ Чат з таким ID вже існує у списку!")
-        await state.clear()
-        return
-
     # 3. Додаємо і зберігаємо
     all_chats.append(new_chat)
     save_chats(all_chats)
