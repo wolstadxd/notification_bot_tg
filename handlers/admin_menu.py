@@ -1,5 +1,5 @@
 from aiogram import Router, F
-from database import load_allowed_users, TEMPLATES_FILE, MAIN_TEMPLATES_FILE, CHATS_FILE
+from database import load_allowed_users, TEMPLATES_FILE, MAIN_TEMPLATES_FILE, CHATS_FILE, ALLOWED_USERS_FILE
 from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
@@ -141,3 +141,9 @@ async def download_logs_callback(callback: CallbackQuery):
         await callback.message.answer_document(FSInputFile(CHATS_FILE))
     else:
         await callback.message.answer("Файл chats.json не знайдено.")
+
+    if os.path.exists(ALLOWED_USERS_FILE):
+        await callback.message.answer_document(FSInputFile(ALLOWED_USERS_FILE))
+    else:
+        await callback.message.answer("Файл allowed_users.json не знайдено.")
+
