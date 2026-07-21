@@ -1,18 +1,60 @@
 {
     "ua": {
-        "low_sr": "тестовий шаблон юа лов ср",
-        "tech": "⚙️ **Техроботи**\nНа стороні банку-партнера в {geo} проводяться планові роботи. ETA: 2 години.",
-        "fixed": "✅ **Відновлено**\nРобота по напрямку {geo} стабілізована. Все працює в штатному режимі.",
-        "p2p_limits": "Колеги, наразі напрямок поповнень P2P працює штатно на суми від 1000 UAH."
+        "low_sr": {
+            "text": "тестовий шаблон юа лов ср",
+            "main_template": null
+        },
+        "tech": {
+            "text": "⚙️ **Техроботи**\nНа стороні банку-партнера в {geo} проводяться планові роботи. ETA: 2 години.",
+            "main_template": null
+        },
+        "fixed": {
+            "text": "✅ **Відновлено**\nРобота по напрямку {geo} стабілізована. Все працює в штатному режимі.",
+            "main_template": null
+        },
+        "p2p_limits": {
+            "text": "Колеги, наразі напрямок поповнень P2P не працює",
+            "main_template": null
+        },
+        "bcp_off": {
+            "text": "Банк bcp тимчасово недоступний",
+            "main_template": "yape_bcp_off"
+        },
+        "p2p_ua_stop": {
+            "text": "Колеги, наразі напрямок поповнень P2P не працює",
+            "main_template": "p2p_ua_stop_p2p_ua"
+        }
     },
     "ru": {
-        "low_sr": "📉 **Low Success Rate**\nНаблюдается снижение конверсии по направлению {geo}. Технический отдел уже занимается.",
-        "tech": "⚙️ **Техработы**\nНа стороне банка-партнера в {geo} проводятся плановые работы. ETA: 2 часа.",
-        "quasi_stop": "Коллеги, на данный момент фиксируем сложности по направлению квази пополнений UAH, по обновлению уведомим."
+        "low_sr": {
+            "text": "📉 **Low Success Rate**\nНаблюдается снижение конверсии по направлению {geo}. Технический отдел уже занимается.",
+            "main_template": null
+        },
+        "tech": {
+            "text": "⚙️ **Техработы**\nНа стороне банка-партнера в {geo} проводятся плановые работы. ETA: 2 часа.",
+            "main_template": null
+        },
+        "quasi_stop": {
+            "text": "Коллеги, на данный момент фиксируем сложности по направлению квази пополнений UAH, по обновлению уведомим.",
+            "main_template": null
+        },
+        "bcp_off": {
+            "text": "Банк bcp_off",
+            "main_template": "yape_bcp_off"
+        }
     },
     "en": {
-        "low_sr": "📉 **Low Success Rate**\nConversion drop detected for {geo}. Technical department is already investigating.",
-        "tech": "⚙️ **Maintenance**\nScheduled maintenance on the partner bank's side in {geo}. ETA: 2 hours.",
-        "fixed": "✅ Restored\nOperations for {geo} have been stabilized. Everything is working normally"
+        "low_sr": {
+            "text": "📉 Low Success Rate\nConversion drop detected for {geo}. Technical department is already investigating.",
+            "main_template": null
+        },
+        "tech": {
+            "text": "⚙️ **Maintenance**\nScheduled maintenance on the partner bank's side in {geo}. ETA: 2 hours.",
+            "main_template": null
+        },
+        "fixed": {
+            "text": "✅ Restored\nOperations for {geo} have been stabilized. Everything is working normally",
+            "main_template": null
+        }
     }
 }

@@ -170,7 +170,8 @@ async def execute_broadcast(callback: CallbackQuery, state: FSMContext, bot: Bot
     templates = load_templates()
     
     try:
-        template_text = templates[lang][tmpl_type].format(geo=geo.upper())
+        tmpl_obj = templates[lang][tmpl_type]
+        template_text = (tmpl_obj["text"] if isinstance(tmpl_obj, dict) else tmpl_obj).format(geo=geo.upper())
     except Exception as e:
         await callback.answer(f"Помилка в шаблоні: {e}", show_alert=True)
         return

@@ -1,5 +1,5 @@
 from aiogram import Router, F
-from database import load_allowed_users
+from database import load_allowed_users, TEMPLATES_FILE, MAIN_TEMPLATES_FILE, CHATS_FILE
 from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
@@ -14,10 +14,12 @@ router = Router()
 def get_admin_menu():
     kb = InlineKeyboardBuilder()
     kb.row(InlineKeyboardButton(text="🚀 Почати розсилку", callback_data="start_broadcast"))
+    kb.row(InlineKeyboardButton(text="📢 Mass Cast", callback_data="mass_cast_start"))
     kb.row(InlineKeyboardButton(text="📋 Список чатів", callback_data="list_chats_menu"))
     kb.row(InlineKeyboardButton(text="➕ Додати чат", callback_data="add_chat_menu"))
     kb.row(InlineKeyboardButton(text="👥 Керування користувачами", callback_data="manage_users"))
     kb.row(InlineKeyboardButton(text="📝 Керування шаблонами", callback_data="manage_templates"))
+    kb.row(InlineKeyboardButton(text="🗂 Головні шаблони", callback_data="manage_main"))
     kb.row(InlineKeyboardButton(text="📁 Завантажити логи", callback_data="download_logs"))
     return kb.as_markup()
 
@@ -124,3 +126,18 @@ async def download_logs_callback(callback: CallbackQuery):
         await callback.message.answer_document(FSInputFile(HISTORY_FILE))
     else:
         await callback.message.answer("Файл sent_history.json не знайдено.")
+
+    if os.path.exists(TEMPLATES_FILE):
+        await callback.message.answer_document(FSInputFile(TEMPLATES_FILE))
+    else:
+        await callback.message.answer("Файл templates.json не знайдено.")
+
+    if os.path.exists(MAIN_TEMPLATES_FILE):
+        await callback.message.answer_document(FSInputFile(MAIN_TEMPLATES_FILE))
+    else:
+        await callback.message.answer("Файл main_templates.json не знайдено.")
+
+    if os.path.exists(CHATS_FILE):
+        await callback.message.answer_document(FSInputFile(CHATS_FILE))
+    else:
+        await callback.message.answer("Файл chats.json не знайдено.")

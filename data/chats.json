@@ -4,23 +4,21 @@
         "id": -5085462955,
         "tags": [
             "peru",
-            "en",
+            "ru",
             "yape"
         ],
         "mentions": [],
         "status": "merchant"
     },
     {
-        "name": "Чат Перу",
+        "name": "Чат Перу 2",
         "id": -5229326817,
         "tags": [
             "peru",
-            "ru"
+            "ua",
+            "yape"
         ],
-        "mentions": [
-            "@test3",
-            "@test4"
-        ],
+        "mentions": [],
         "status": "merchant"
     },
     {

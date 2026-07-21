@@ -1,0 +1,10 @@
+{
+    "p2p_try_stop_1000": {
+        "direction": "p2p_try",
+        "event": "stop_1000"
+    },
+    "yape_bcp_off": {
+        "direction": "yape",
+        "event": "bcp_off"
+    }
+}
