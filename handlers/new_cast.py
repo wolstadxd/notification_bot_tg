@@ -292,12 +292,20 @@ async def delete_last_execution(callback: CallbackQuery, bot: Bot, state: FSMCon
     del config.sent_history[last_id]
     config.save_history(config.sent_history)
     
+    direction = broadcast_data.get('direction')
+    event = broadcast_data.get('event')
+
+    if direction and event:
+        filter_text = f"📍 {geo.upper()} | ⚡ {direction.upper()} — {event.upper()}"
+    else:
+        filter_text = f"📍 ГЕО: {geo}\n⚙️ Метод: {method}"
+
     await callback.answer("Розсилку видалено всюди!")
     await callback.message.edit_text(
-        f"🗑 **Останню розсилку видалено:**\n\n"
-        f"📍 ГЕО: {geo}\n"
-        f"⚙️ Метод: {method}\n"
-        f"📨 Видалено повідомлень: {deleted_count}"
+        f"🗑 <b>Останню розсилку видалено:</b>\n\n"
+        f"{filter_text}\n"
+        f"📊 Видалено повідомлень: {deleted_count}",
+        parse_mode="HTML"
     )
     
     await start_broadcast(callback.message, state)

@@ -159,13 +159,27 @@ async def delete_broadcast_by_button(callback: CallbackQuery, bot: Bot):
     del config.sent_history[broadcast_id]
     config.save_history(config.sent_history)
 
-    geo = broadcast_data.get('geo')
-    lang = broadcast_data.get('lang')
-    method = broadcast_data.get("method", "ALL")
-    # 6. Оновлюємо повідомлення в адмінці
-    await callback.message.edit_text(
+    geo = broadcast_data.get('geo', 'N/A').upper()
+    direction = broadcast_data.get('direction')
+    event = broadcast_data.get('event')
+
+    if direction and event:
+        filter_info = f"📍 {geo} | ⚡ {direction.upper()} — {event.upper()}"
+    else:
+        lang = str(broadcast_data.get('lang', 'N/A')).upper()
+        method = str(broadcast_data.get("method", "ALL")).upper()
+        filter_info = f"📍 {geo} | 🗣 {lang} | 🛠 {method}"
+
+    # 6. Прибираємо кнопку з оригінального повідомлення
+    try:
+        await callback.message.edit_reply_markup(reply_markup=None)
+    except Exception:
+        pass
+
+    # 7. Надсилаємо окреме нове повідомлення
+    await callback.message.answer(
         f"🗑 <b>Розсилку видалено з усіх чатів</b>\n\n"
-        f"📍 {geo} | 🗣 {lang} | 🛠 {method}\n"
+        f"{filter_info}\n"
         f"📊 Видалено повідомлень: {deleted_count}",
         parse_mode="HTML"
     )
