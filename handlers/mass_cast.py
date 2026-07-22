@@ -85,15 +85,38 @@ async def choose_main_template(callback: CallbackQuery, state: FSMContext):
         await callback.answer()
         return
 
+    # Фільтруємо: показуємо тільки шаблони, для яких є чати з geo + direction
+    chats = load_chats()
+    available_directions = set()
+    for chat in chats:
+        tags = chat.get("tags", [])
+        if tags and tags[0] == geo:
+            for tag in tags[1:]:
+                available_directions.add(tag)
+
     kb = InlineKeyboardBuilder()
+    filtered_count = 0
     for tmpl_id, tmpl_data in main_templates.items():
         direction = tmpl_data.get("direction", "?")
         event = tmpl_data.get("event", "?")
-        kb.row(InlineKeyboardButton(
-            text=f"⚡ {direction.upper()} — {event.upper()}",
-            callback_data=f"mc_tmpl_{tmpl_id}"
-        ))
+        if direction in available_directions:
+            kb.row(InlineKeyboardButton(
+                text=f"⚡ {direction.upper()} — {event.upper()}",
+                callback_data=f"mc_tmpl_{tmpl_id}"
+            ))
+            filtered_count += 1
     kb.row(InlineKeyboardButton(text="⬅️ Назад до ГЕО", callback_data="mc_back_geo"))
+
+    if filtered_count == 0:
+        await callback.message.edit_text(
+            f"📍 ГЕО: <b>{geo.upper()}</b>\n\n"
+            "❌ Для цього ГЕО немає відповідних головних шаблонів.\n"
+            "Перевірте теги чатів та direction головних шаблонів.",
+            parse_mode="HTML"
+        )
+        await state.clear()
+        await callback.answer()
+        return
 
     await state.set_state(MassCastStates.choosing_main_template)
     await callback.message.edit_text(
