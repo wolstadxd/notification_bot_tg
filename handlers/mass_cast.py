@@ -184,9 +184,10 @@ async def execute_mass_cast(callback: CallbackQuery, state: FSMContext, bot: Bot
 
         target_chats = [
             c for c in chats
-            if geo in c.get("tags", [])
-            and lang in c.get("tags", [])
-            and direction in c.get("tags", [])
+            if len(c.get("tags", [])) >= 2
+            and c["tags"][0] == geo
+            and c["tags"][1] == lang
+            and direction in c["tags"][2:]
         ]
 
         lang_success = 0
