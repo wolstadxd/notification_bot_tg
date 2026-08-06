@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.filters import Command
 from handlers.states import BroadcastStates
 from config import sent_history, write_event_log
-from database import load_chats, load_allowed_users, load_templates
+from database import load_chats, load_allowed_users, load_templates, record_method_broadcast, remove_method_broadcast
 import config
 from keyboards import get_template_kb, get_lang_kb, get_lang_kb_all
 
@@ -221,6 +221,18 @@ async def execute_broadcast(callback: CallbackQuery, state: FSMContext, bot: Bot
     }
     config.save_history(config.sent_history)
 
+    # Записуємо статус методу
+    if method == "all":
+        # Збираємо всі унікальні методи з цільових чатів
+        all_methods = set()
+        for chat in target_chats:
+            for m in chat.get("tags", [])[2:]:
+                all_methods.add(m)
+        for m in all_methods:
+            record_method_broadcast(broadcast_id, geo, m, "new_cast", tmpl_type, template_text, success, errors)
+    else:
+        record_method_broadcast(broadcast_id, geo, method, "new_cast", tmpl_type, template_text, success, errors)
+
     config.write_event_log("SEND", {
         "broadcast_id": broadcast_id,
         "geo": geo.upper(),
@@ -288,7 +300,8 @@ async def delete_last_execution(callback: CallbackQuery, bot: Bot, state: FSMCon
         "deleted_messages": deleted_count
     })
 
-    # Видаляємо з пам'яті та зберігаємо файл історії
+    # Відкочуємо статус методу та видаляємо з пам'яті
+    remove_method_broadcast(last_id)
     del config.sent_history[last_id]
     config.save_history(config.sent_history)
     
