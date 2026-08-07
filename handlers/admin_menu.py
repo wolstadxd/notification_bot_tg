@@ -21,7 +21,6 @@ def get_admin_menu():
     kb.row(InlineKeyboardButton(text="📝 Керування шаблонами", callback_data="manage_templates"))
     kb.row(InlineKeyboardButton(text="🗂 Головні шаблони", callback_data="manage_main"))
     kb.row(InlineKeyboardButton(text="📁 Завантажити логи", callback_data="download_logs"))
-    kb.row(InlineKeyboardButton(text="📊 Methods status", callback_data="methods_status_menu"))
     return kb.as_markup()
 
 @router.message(Command("admin_panel"))
@@ -48,10 +47,7 @@ async def admin_menu_callback(callback: CallbackQuery):
         "⚙️ **Адмін-панель**\n\n"
         "Оберіть розділ для керування:"
     )
-    try:
-        await callback.message.edit_text(text, reply_markup=get_admin_menu(), parse_mode="HTML")
-    except Exception:
-        pass
+    await callback.message.edit_text(text, reply_markup=get_admin_menu(), parse_mode="HTML")
     await callback.answer()
 
 
