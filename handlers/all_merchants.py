@@ -5,7 +5,7 @@ from aiogram.types import CallbackQuery, Message, InlineKeyboardButton
 from aiogram.filters import Command
 from database import load_allowed_users
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from database import load_chats
+from database import load_chats, record_method_broadcast
 import config
 from keyboards import get_lang_kb_all, get_yes_no_custom_kb_all, back_to_lang_all_kb
 
@@ -88,6 +88,17 @@ async def send_custom_templeate_all(callback: CallbackQuery, state: FSMContext, 
         "messages": temp_messages
     }
     config.save_history(config.sent_history)
+
+    # Записуємо статус методу для кожного методу в цільових чатах
+    target_methods = set()
+    for chat in chats:
+        if 'merchant' in chat["status"] and all_lang in chat["tags"]:
+            tags = chat.get("tags", [])
+            geo = tags[0] if tags else "unknown"
+            for m in tags[2:]:
+                target_methods.add((geo, m))
+    for geo, m in target_methods:
+        record_method_broadcast(broadcast_id, geo, m, "custom", "custom_all", final_text, success_count, error_count)
 
     config.write_event_log("SEND CUSTOM_ALL", {
         "broadcast_id": broadcast_id,

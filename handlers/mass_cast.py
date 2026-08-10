@@ -4,7 +4,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.fsm.context import FSMContext
 from aiogram.filters import Command
 from handlers.states import MassCastStates
-from database import load_chats, load_allowed_users, load_templates, load_main_templates
+from database import load_chats, load_allowed_users, load_templates, load_main_templates, record_method_broadcast
 import config
 
 router = Router()
@@ -218,6 +218,15 @@ async def execute_mass_cast(callback: CallbackQuery, state: FSMContext, bot: Bot
         "messages": all_sent_messages
     }
     config.save_history(config.sent_history)
+
+    # Записуємо статус методу (direction = method)
+    # Беремо текст з першого мовного шаблону для прев'ю
+    sample_text = linked[0][2] if linked else ""
+    record_method_broadcast(
+        broadcast_id, geo, direction, "mass_cast",
+        f"{direction}_{event}", sample_text,
+        total_success, total_errors
+    )
 
     config.write_event_log("MASS_SEND", {
         "broadcast_id": broadcast_id,
