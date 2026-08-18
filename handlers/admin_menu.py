@@ -43,10 +43,7 @@ async def admin_menu_callback(callback: CallbackQuery):
     if callback.from_user.id not in allowed_users:
         await callback.answer("❌ You don't have access", show_alert=True)
         return
-
-    # Відповідаємо ПЕРШИМ, щоб Loading зник миттєво
-    await callback.answer()
-
+    
     text = (
         "⚙️ **Адмін-панель**\n\n"
         "Оберіть розділ для керування:"
@@ -54,8 +51,8 @@ async def admin_menu_callback(callback: CallbackQuery):
     try:
         await callback.message.edit_text(text, reply_markup=get_admin_menu(), parse_mode="HTML")
     except Exception:
-        # Якщо повідомлення старе або не можна відредагувати — надсилаємо нове
-        await callback.message.answer(text, reply_markup=get_admin_menu(), parse_mode="HTML")
+        pass
+    await callback.answer()
 
 
 @router.callback_query(F.data == "start_broadcast")
