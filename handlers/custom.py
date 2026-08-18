@@ -5,7 +5,7 @@ from aiogram import Router, F
 from handlers.states import BroadcastStates
 from aiogram.fsm.context import FSMContext
 from aiogram.types import InlineKeyboardButton, Message, CallbackQuery
-from database import load_chats, record_method_broadcast, remove_method_broadcast
+from database import load_chats
 import config
 from keyboards import get_yes_no_custom_kb, back_to_geo
 from handlers.admin_menu import get_admin_menu
@@ -95,17 +95,6 @@ async def send_custom_broadcast(callback: CallbackQuery, state: FSMContext, bot:
     }
     config.save_history(config.sent_history)
 
-    # Записуємо статус методу
-    if method.lower() == "all":
-        all_methods = set()
-        for chat in target_chats:
-            for m in chat.get("tags", [])[2:]:
-                all_methods.add(m)
-        for m in all_methods:
-            record_method_broadcast(broadcast_id, geo, m, "custom", "custom", final_text, success_count, error_count)
-    else:
-        record_method_broadcast(broadcast_id, geo, method, "custom", "custom", final_text, success_count, error_count)
-
     config.write_event_log("SEND CUSTOM", {
         "broadcast_id": broadcast_id,
         "geo": geo.upper(),
@@ -166,8 +155,7 @@ async def delete_broadcast_by_button(callback: CallbackQuery, bot: Bot):
         "deleted_messages": deleted_count
     })
 
-    # 5. Відкочуємо статус методу та видаляємо запис з історії
-    remove_method_broadcast(broadcast_id)
+    # 5. Видаляємо запис з історії та зберігаємо
     del config.sent_history[broadcast_id]
     config.save_history(config.sent_history)
 
