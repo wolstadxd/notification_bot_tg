@@ -26,12 +26,10 @@
         "id": -5093445860,
         "tags": [
             "ua",
-            "ua"
+            "ua",
+            "p2p_ua"
         ],
-        "mentions": [
-            "@test5",
-            "@test6"
-        ],
+        "mentions": [],
         "status": "merchant"
     },
     {

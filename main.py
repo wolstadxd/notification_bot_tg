@@ -12,6 +12,7 @@ from handlers.admin_menu import router as admin_menu_router
 from handlers.new_cast import router as new_cast
 from handlers.mass_cast import router as mass_cast
 from handlers.manage_main_templates import router as manage_main_templates_router
+from handlers.methods_status import router as methods_status_router
 
 async def main():
     bot = Bot(token=TOKEN)
@@ -28,6 +29,7 @@ async def main():
     dp.include_router(new_cast)
     dp.include_router(mass_cast)
     dp.include_router(manage_main_templates_router)
+    dp.include_router(methods_status_router)
     await dp.start_polling(bot)
 
 if __name__ == '__main__':

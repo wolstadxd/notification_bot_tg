@@ -1,0 +1,65 @@
+{
+    "peru:yape": [
+        {
+            "broadcast_id": "1878099403250226855",
+            "geo": "PERU",
+            "method": "yape",
+            "cast_type": "mass_cast",
+            "template_name": "yape_bcp_off",
+            "text": "Банк bcp тимчасово недоступний",
+            "timestamp": "2026-08-06 14:56:29",
+            "success_count": 2,
+            "error_count": 0
+        }
+    ],
+    "cl:mach": [
+        {
+            "broadcast_id": "1878099401893608644",
+            "geo": "CL",
+            "method": "mach",
+            "cast_type": "new_cast",
+            "template_name": "bcp_off",
+            "text": "Банк bcp тимчасово недоступний",
+            "timestamp": "2026-08-06 14:57:11",
+            "success_count": 1,
+            "error_count": 0
+        },
+        {
+            "broadcast_id": "1878099400595408527",
+            "geo": "CL",
+            "method": "mach",
+            "cast_type": "new_cast",
+            "template_name": "tech",
+            "text": "⚙️ **Техроботи**\nНа стороні банку-партнера в CL проводяться планові роботи. ETA: 2 години.",
+            "timestamp": "2026-08-06 14:58:51",
+            "success_count": 1,
+            "error_count": 0
+        }
+    ],
+    "cl:p2p_vip": [
+        {
+            "broadcast_id": "1878099400595408527",
+            "geo": "CL",
+            "method": "p2p_vip",
+            "cast_type": "new_cast",
+            "template_name": "tech",
+            "text": "⚙️ **Техроботи**\nНа стороні банку-партнера в CL проводяться планові роботи. ETA: 2 години.",
+            "timestamp": "2026-08-06 14:58:51",
+            "success_count": 1,
+            "error_count": 0
+        }
+    ],
+    "cl:khipu": [
+        {
+            "broadcast_id": "1878099400595408527",
+            "geo": "CL",
+            "method": "khipu",
+            "cast_type": "new_cast",
+            "template_name": "tech",
+            "text": "⚙️ **Техроботи**\nНа стороні банку-партнера в CL проводяться планові роботи. ETA: 2 години.",
+            "timestamp": "2026-08-06 14:58:51",
+            "success_count": 1,
+            "error_count": 0
+        }
+    ]
+}
