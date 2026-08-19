@@ -81,6 +81,8 @@ async def methods_status_menu_callback(callback: CallbackQuery):
         await callback.answer("❌ You don't have access", show_alert=True)
         return
 
+    await callback.answer()  # знімаємо Loading миттєво
+
     text, buttons = _build_status_text()
 
     kb = InlineKeyboardBuilder()
@@ -92,8 +94,10 @@ async def methods_status_menu_callback(callback: CallbackQuery):
             ))
     kb.row(InlineKeyboardButton(text="⬅️ Назад до меню", callback_data="admin_menu"))
 
-    await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="HTML")
-    await callback.answer()
+    try:
+        await callback.message.edit_text(text, reply_markup=kb.as_markup(), parse_mode="HTML")
+    except Exception:
+        await callback.message.answer(text, reply_markup=kb.as_markup(), parse_mode="HTML")
 
 
 @router.callback_query(F.data.startswith("ms_detail_"))
@@ -103,10 +107,12 @@ async def method_detail_callback(callback: CallbackQuery):
         await callback.answer("❌ You don't have access", show_alert=True)
         return
 
-    # Парсимо geo та method з callback_data: ms_detail_<geo>_<method>
+    await callback.answer()  # знімаємо Loading миттєво
+
+    # Парсуємо geo та method з callback_data: ms_detail_<geo>_<method>
     parts = callback.data.removeprefix("ms_detail_").split("_", 1)
     if len(parts) < 2:
-        await callback.answer("❌ Невірний формат", show_alert=True)
+        await callback.message.answer("❌ Невірний формат")
         return
 
     geo = parts[0]
@@ -117,7 +123,7 @@ async def method_detail_callback(callback: CallbackQuery):
     records = data.get(key, [])
 
     if not records:
-        await callback.answer("❌ Дані не знайдено", show_alert=True)
+        await callback.message.answer("❌ Дані не знайдено")
         return
 
     latest = records[-1]
@@ -147,12 +153,14 @@ async def method_detail_callback(callback: CallbackQuery):
         f"🕐 Час: {timestamp}\n"
         f"✅ Успішно: {success} | ❌ Помилок: {errors}\n\n"
         f"<b>Текст повідомлення:</b>\n"
-        f"<blockquote>{display_text}</blockquote>"
+        f"<pre>{display_text}</pre>"
     )
 
     kb = InlineKeyboardBuilder()
     kb.row(InlineKeyboardButton(text="⬅️ Назад до статусів", callback_data="methods_status_menu"))
     kb.row(InlineKeyboardButton(text="🏠 Головне меню", callback_data="admin_menu"))
 
-    await callback.message.edit_text(detail_msg, reply_markup=kb.as_markup(), parse_mode="HTML")
-    await callback.answer()
+    try:
+        await callback.message.edit_text(detail_msg, reply_markup=kb.as_markup(), parse_mode="HTML")
+    except Exception:
+        await callback.message.answer(detail_msg, reply_markup=kb.as_markup(), parse_mode="HTML")
