@@ -1,7 +1,9 @@
+import html
 from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
 from database import load_allowed_users, get_latest_method_statuses, load_method_history
 
 router = Router()
@@ -10,14 +12,14 @@ router = Router()
 def _format_status_desc(record):
     """Повертає короткий опис типу/шаблону для першого рядка."""
     cast_type = record.get("cast_type", "?")
-    template_name = record.get("template_name", "?")
+    template_name = html.escape(str(record.get("template_name", "?")))
     text = record.get("text", "")
 
     if cast_type == "mass_cast":
         return f"⚡ <code>{template_name}</code>"
     elif cast_type == "custom":
         preview = text[:60] + "…" if len(text) > 60 else text
-        return f'✍️ "<i>{preview}</i>"'
+        return f'✍️ "<i>{html.escape(preview)}</i>"'
     else:  # new_cast
         return f"📝 <code>{template_name}</code>"
 
@@ -54,7 +56,8 @@ def _build_status_text():
 
 
 @router.message(Command("methods_status"))
-async def methods_status_cmd(message: Message):
+async def methods_status_cmd(message: Message, state: FSMContext):
+    await state.clear()
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
         await message.answer("❌ You don't have access")
@@ -75,12 +78,13 @@ async def methods_status_cmd(message: Message):
 
 
 @router.callback_query(F.data == "methods_status_menu")
-async def methods_status_menu_callback(callback: CallbackQuery):
+async def methods_status_menu_callback(callback: CallbackQuery, state: FSMContext):
     allowed_users = load_allowed_users()
     if callback.from_user.id not in allowed_users:
         await callback.answer("❌ You don't have access", show_alert=True)
         return
 
+    await state.clear()
     await callback.answer()  # знімаємо Loading миттєво
 
     text, buttons = _build_status_text()
@@ -101,12 +105,13 @@ async def methods_status_menu_callback(callback: CallbackQuery):
 
 
 @router.callback_query(F.data.startswith("ms_detail_"))
-async def method_detail_callback(callback: CallbackQuery):
+async def method_detail_callback(callback: CallbackQuery, state: FSMContext):
     allowed_users = load_allowed_users()
     if callback.from_user.id not in allowed_users:
         await callback.answer("❌ You don't have access", show_alert=True)
         return
 
+    await state.clear()
     await callback.answer()  # знімаємо Loading миттєво
 
     # Парсуємо geo та method з callback_data: ms_detail_<geo>_<method>
@@ -128,7 +133,7 @@ async def method_detail_callback(callback: CallbackQuery):
 
     latest = records[-1]
     cast_type = latest.get("cast_type", "?")
-    template_name = latest.get("template_name", "?")
+    template_name = html.escape(str(latest.get("template_name", "?")))
     text = latest.get("text", "—")
     timestamp = latest.get("timestamp", "?")
     success = latest.get("success_count", 0)
@@ -136,7 +141,8 @@ async def method_detail_callback(callback: CallbackQuery):
 
     # Обмежуємо текст повідомлення для Telegram (4096 символів)
     max_text_len = 3000
-    display_text = text[:max_text_len] + "…" if len(text) > max_text_len else text
+    trimmed_text = text[:max_text_len] + "…" if len(text) > max_text_len else text
+    display_text = html.escape(trimmed_text)
 
     type_label = {
         "new_cast": "📝 New Cast",
@@ -147,7 +153,7 @@ async def method_detail_callback(callback: CallbackQuery):
     detail_msg = (
         f"📊 <b>Деталі останньої розсилки</b>\n\n"
         f"📍 ГЕО: <b>{geo.upper()}</b>\n"
-        f"⚙️ Метод: <code>{method}</code>\n"
+        f"⚙️ Метод: <code>{html.escape(method)}</code>\n"
         f"📋 Тип: {type_label}\n"
         f"🏷 Шаблон: <code>{template_name}</code>\n"
         f"🕐 Час: {timestamp}\n"

@@ -25,7 +25,8 @@ def get_admin_menu():
     return kb.as_markup()
 
 @router.message(Command("admin_panel"))
-async def admin_panel_cmd(message: Message):
+async def admin_panel_cmd(message: Message, state: FSMContext):
+    await state.clear()
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
         await message.answer("❌ You don't have access")
@@ -38,12 +39,13 @@ async def admin_panel_cmd(message: Message):
     await message.answer(text, reply_markup=get_admin_menu(), parse_mode="HTML")
 
 @router.callback_query(F.data == "admin_menu")
-async def admin_menu_callback(callback: CallbackQuery):
+async def admin_menu_callback(callback: CallbackQuery, state: FSMContext):
     allowed_users = load_allowed_users()
     if callback.from_user.id not in allowed_users:
         await callback.answer("❌ You don't have access", show_alert=True)
         return
 
+    await state.clear()
     # Відповідаємо ПЕРШИМ, щоб Loading зник миттєво
     await callback.answer()
 

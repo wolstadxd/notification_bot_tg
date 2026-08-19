@@ -28,17 +28,20 @@ async def start_custom_text_input(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
 
 
-@router.message(BroadcastStates.entering_custom_text)
+@router.message(BroadcastStates.entering_custom_text, F.text, ~F.text.startswith("/"))
 async def preview_custom_message(message: Message, state: FSMContext):
     # Зберігаємо введений текст
     await state.update_data(user_text=message.text)
     data = await state.get_data()
+    geo = (data.get('geo') or 'N/A').upper()
+    lang = (data.get('lang') or 'N/A').upper()
+    method = (data.get('method') or 'N/A').upper()
     
     await message.answer(
         f"🧐 **ПРЕВ'Ю ПОВІДОМЛЕННЯ:**\n\n"
         f"{message.text}\n\n"
         f"--- \n"
-        f"Відправити в усі чати {data.get('geo').upper()} | {data.get('lang').upper()} | {data.get('method').upper()}?",
+        f"Відправити в усі чати {geo} | {lang} | {method}?",
         reply_markup=get_yes_no_custom_kb(),
         parse_mode="HTML"
     )

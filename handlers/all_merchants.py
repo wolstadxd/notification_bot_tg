@@ -17,7 +17,8 @@ class CustomAll(StatesGroup):
 
 
 @router.message(Command("all_merchants"))
-async def cmd_all_merchants(message: Message):
+async def cmd_all_merchants(message: Message, state: FSMContext):
+    await state.clear()
     allowed_users = load_allowed_users()
     if message.from_user.id not in allowed_users:
         await message.answer("❌ You don't have access")
@@ -37,15 +38,15 @@ async def listening_text_all(callback: CallbackQuery, state: FSMContext):
     await state.set_state(CustomAll.text)
     await callback.answer()
 
-@router.message(CustomAll.text)
+@router.message(CustomAll.text, F.text, ~F.text.startswith("/"))
 async def check_text(message: Message, state: FSMContext):
     await state.update_data(text = message.text)
     data = await state.get_data()
     user_text = data.get('text')
-    lang_all = data.get('lang')
+    lang_all = (data.get('lang') or 'N/A').upper()
 
     await message.answer(
-        f'Ось твій текст для усіх мерчантів для мови {lang_all.upper()}:\n\n\"{user_text}\"\n\n Надсилати?',
+        f'Ось твій текст для усіх мерчантів для мови {lang_all}:\n\n\"{user_text}\"\n\n Надсилати?',
         reply_markup=get_yes_no_custom_kb_all()
     )
 
